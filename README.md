@@ -2,8 +2,10 @@
 
 ## Norwegian
 
-[oppgaven](/docs/no/assignment.md)
+- [Oppgaven](/docs/no/assignment.md)
+- [Min tolkning av oppgaven](/docs/no/interpretation.md)
 
 ## English
 
-[assignment](/docs/en/assignment.md)
+- [Assignment](/docs/en/assignment.md)
+- [My interpretation of the task] (/docs/en/interpretation.md)
