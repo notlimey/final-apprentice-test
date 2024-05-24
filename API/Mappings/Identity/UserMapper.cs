@@ -5,7 +5,7 @@ using Riok.Mapperly.Abstractions;
 namespace API.Mappings.Identity;
 
 [Mapper]
-public partial class UserMapper
+public static partial class UserMapper
 {
-    public partial UserDto ToDto(ApplicationUser user);
+    public static partial UserDto ToUserDto(this ApplicationUser user);
 }

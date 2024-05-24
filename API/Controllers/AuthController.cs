@@ -16,14 +16,12 @@ public class AuthController
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly UserMapper _userMapper;
     private readonly IConfiguration _configuration;
     
-    public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, UserMapper userMapper, IConfiguration configuration)
+    public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        _userMapper = userMapper;
         _configuration = configuration;
     }
     
@@ -36,7 +34,7 @@ public class AuthController
             var token = GenerateJwtToken(user);
             return new LoginResultDto()
             {
-                User = _userMapper.ToDto(user),
+                User = user.ToUserDto(),
                 AuthToken = token
             };
         }
@@ -64,7 +62,7 @@ public class AuthController
             throw new Exception(result.Errors.First().Description);
         }
 
-        return _userMapper.ToDto(user);
+        return user.ToUserDto();
     }
     
     

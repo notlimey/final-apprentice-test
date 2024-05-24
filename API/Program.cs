@@ -48,8 +48,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddSingleton<UserMapper>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
