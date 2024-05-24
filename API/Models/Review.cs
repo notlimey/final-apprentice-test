@@ -1,0 +1,39 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace API.Models;
+
+public class Review
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; }
+    
+    public string Title { get; set; } = String.Empty;
+    
+    public DateOnly DateVisited { get; set; }
+    
+    public int FoodQualityRating { get; set; }
+    
+    public int ServiceQualityRating { get; set; }
+    
+    public int AmbianceRating { get; set; }
+    
+    public int ValueForMoneyRating { get; set; }
+    
+    public int OverallRating { get; set; }
+    
+    public string Comment { get; set; } = String.Empty;
+    
+    public DateTime CreatedAt { get; set; }
+    
+    public DateTime UpdatedAt { get; set; }
+    
+    // relations
+    
+    public Guid RestaurantId { get; set; }
+    
+    public Restaurant Restaurant { get; set; } = null!;
+    
+    // user id going here
+}
