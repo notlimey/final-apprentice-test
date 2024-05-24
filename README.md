@@ -8,4 +8,4 @@
 ## English
 
 - [Assignment](/docs/en/assignment.md)
-- [My interpretation of the task] (/docs/en/interpretation.md)
+- [My interpretation of the task](/docs/en/interpretation.md)
