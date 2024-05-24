@@ -25,9 +25,9 @@ public class Review
     
     public string Comment { get; set; } = String.Empty;
     
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
     
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
     
     // relations
     
