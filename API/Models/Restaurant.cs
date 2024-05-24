@@ -1,4 +1,3 @@
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +10,10 @@ public class Restaurant
     public Guid Id { get; set; }
     
     public string Name { get; set; } = String.Empty;
+    
+    [Required]
+    [MaxLength(100)]
+    public string Slug { get; set; } = String.Empty;
     
     public string Description { get; set; } = String.Empty;
     

@@ -17,6 +17,12 @@ public class DataDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<Restaurant>()
+            .HasIndex(r => r.Slug)
+            .IsUnique();
+        
         modelBuilder.Entity<Restaurant>()
             .HasMany(r => r.Reviews)
             .WithOne(r => r.Restaurant)
