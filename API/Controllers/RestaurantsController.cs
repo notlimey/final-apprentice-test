@@ -1,3 +1,4 @@
+using API.Interfaces;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,13 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class RestaurantsController
 {
+    private readonly IRestaurantService _restaurantService;
+
+    public RestaurantsController(IRestaurantService restaurantService)
+    {
+        _restaurantService = restaurantService;
+    }
+
     [HttpGet("/")]
     [Authorize]
     public IEnumerable<Restaurant> GetAll()
