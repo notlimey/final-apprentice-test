@@ -35,7 +35,7 @@ public class Restaurant
     public string ImageUrl { get; set; } = String.Empty;
     
     // Add a json property for opening hours
-    public string OpeningHours { get; set; } = String.Empty;
+    public OpeningHours OpeningHours { get; set; } = null!;
     
     public double Latitude { get; set; }
     
@@ -52,3 +52,4 @@ public class Restaurant
     // relations
     public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
 }
+

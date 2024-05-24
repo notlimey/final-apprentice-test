@@ -23,6 +23,20 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
 
         modelBuilder.Entity<Restaurant>(entity =>
         {
+            entity.OwnsOne(c => c.OpeningHours,
+                d =>
+                {
+                    d.ToJson();
+                    
+                    d.OwnsOne(o => o.Monday);
+                    d.OwnsOne(o => o.Tuesday);
+                    d.OwnsOne(o => o.Wednesday);
+                    d.OwnsOne(o => o.Thursday);
+                    d.OwnsOne(o => o.Friday);
+                    d.OwnsOne(o => o.Saturday);
+                    d.OwnsOne(o => o.Sunday);
+                });
+            
             entity.HasIndex(s => s.Slug).IsUnique();
 
             entity.HasMany(e => e.Reviews)

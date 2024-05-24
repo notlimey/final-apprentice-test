@@ -1,8 +1,12 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using API.DTOS.Identity;
 using API.Mappings.Identity;
 using API.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers;
 
@@ -13,12 +17,31 @@ public class AuthController
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserMapper _userMapper;
+    private readonly IConfiguration _configuration;
     
-    public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, UserMapper userMapper)
+    public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, UserMapper userMapper, IConfiguration configuration)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _userMapper = userMapper;
+        _configuration = configuration;
+    }
+    
+    [HttpPost("login")]
+    public async Task<LoginResultDto> Login([FromBody] LoginDto model)
+    {
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+        {
+            var token = GenerateJwtToken(user);
+            return new LoginResultDto()
+            {
+                User = _userMapper.ToDto(user),
+                AuthToken = token
+            };
+        }
+        
+        throw new Exception("Invalid login attempt");
     }
     
     [HttpPost("register")]
@@ -42,5 +65,30 @@ public class AuthController
         }
 
         return _userMapper.ToDto(user);
+    }
+    
+    
+    private string GenerateJwtToken(ApplicationUser user)
+    {
+        var jwtSettings = _configuration.GetSection("Jwt");
+        var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
+
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
+            }),
+            Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(jwtSettings["ExpireMinutes"])),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+            Issuer = jwtSettings["Issuer"],
+            Audience = jwtSettings["Audience"]
+        };
+        
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
     }
 }
