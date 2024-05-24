@@ -2,7 +2,7 @@
 
 ## Norwegian
 
-
+[oppgaven](/docs/no/assignment.md)
 
 ## English
 
