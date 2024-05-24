@@ -1,0 +1,41 @@
+# Ignore node_modules if you have Node.js dependencies (e.g., frontend)
+node_modules/
+
+# Ignore build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Mono auto generated files
+mono_crash.*
+
+# OS generated files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# Rider project files
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Local configuration files
+
+# IIS config files
+.vs/
+
+# NPM packages
+*.log
+*.xml
+
