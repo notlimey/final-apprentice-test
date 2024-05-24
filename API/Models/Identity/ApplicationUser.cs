@@ -11,4 +11,6 @@ public class ApplicationUser : IdentityUser
     public string LastName { get; set; } = String.Empty;
     
     public string AvatarUrl { get; set; } = String.Empty;
+    
+    public IEnumerable<ApiToken> ApiTokens { get; set; } = new List<ApiToken>();
 }

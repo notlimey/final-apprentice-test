@@ -15,6 +15,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     public DbSet<Restaurant> Restaurants { get; set; } = null!;
 
     public DbSet<Review> Reviews { get; set; } = null!;
+    
+    public DbSet<ApiToken> ApiTokens { get; set; } = null!;
 
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +44,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
             entity.HasMany(e => e.Reviews)
                 .WithOne(r => r.Restaurant)
                 .HasForeignKey(r => r.RestaurantId);
+        });
+
+        modelBuilder.Entity<ApplicationUser>(entity =>
+        {
+            entity.HasMany(u => u.ApiTokens)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId);
         });
     }
 }

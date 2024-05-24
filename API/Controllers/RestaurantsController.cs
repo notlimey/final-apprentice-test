@@ -1,4 +1,5 @@
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -8,6 +9,7 @@ namespace API.Controllers;
 public class RestaurantsController
 {
     [HttpGet("/")]
+    [Authorize]
     public IEnumerable<Restaurant> GetAll()
     {
         var restaurants = new List<Restaurant>
