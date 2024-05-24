@@ -1,16 +1,10 @@
 using System.Text;
-using API.Auth;
 using API.Data;
 using API.Extensions.Authentication;
 using API.Extensions.Swagger;
-using API.Mappings.Identity;
 using API.Models.Identity;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
