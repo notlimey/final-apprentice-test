@@ -45,6 +45,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
                 .WithOne(r => r.Restaurant)
                 .HasForeignKey(r => r.RestaurantId);
         });
+        
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasOne(r => r.Restaurant)
+                .WithMany(r => r.Reviews)
+                .HasForeignKey(r => r.RestaurantId);
+            
+            entity.HasOne(r => r.User)
+                .WithMany(u => u.Reviews)
+                .HasForeignKey(r => r.UserId);
+        });
+        
 
         modelBuilder.Entity<ApplicationUser>(entity =>
         {

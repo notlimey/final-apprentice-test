@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Models.Identity;
 
 namespace API.Models;
 
@@ -35,5 +36,7 @@ public class Review
     
     public Restaurant Restaurant { get; set; } = null!;
     
-    // user id going here
+    public string UserId { get; set; }
+    
+    public ApplicationUser User { get; set; } = null!;
 }

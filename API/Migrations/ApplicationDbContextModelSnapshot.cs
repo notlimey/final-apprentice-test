@@ -271,12 +271,18 @@ namespace API.Migrations
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("ValueForMoneyRating")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RestaurantId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -574,7 +580,15 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("API.Models.Identity.ApplicationUser", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Restaurant");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -631,6 +645,8 @@ namespace API.Migrations
             modelBuilder.Entity("API.Models.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("ApiTokens");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("API.Models.Restaurant", b =>
