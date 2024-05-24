@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "s5llslbX7+z/YaAyJFUXSQYrevE8S46BVtk/kq9dExT4kz+zvikYMSTjywXMDjoShLlvvGCSJi8CHW++1yJlxQ==",
+  "dgSpecHash": "VIloWpaVWSH9bMJOJbk+q7hAGEgXJHBEKPVaJ+dJyHsxG4jfnayzYMqmfEySaKBIBvN9wrpJBV/gtZeFm7KyhQ==",
   "success": true,
   "projectFilePath": "/Users/martinmyhre/Documents/Repositories/fagprove/API/API.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "/Users/martinmyhre/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/Users/martinmyhre/.nuget/packages/npgsql/8.0.3/npgsql.8.0.3.nupkg.sha512",
     "/Users/martinmyhre/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.4/npgsql.entityframeworkcore.postgresql.8.0.4.nupkg.sha512",
+    "/Users/martinmyhre/.nuget/packages/riok.mapperly/3.5.1/riok.mapperly.3.5.1.nupkg.sha512",
     "/Users/martinmyhre/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/martinmyhre/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "/Users/martinmyhre/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
