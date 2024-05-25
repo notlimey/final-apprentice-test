@@ -35,9 +35,12 @@ public class ApiAuthenticationHandler: AuthenticationHandler<AuthenticationSchem
         if (string.IsNullOrEmpty(apiKey))
             return AuthenticateResult.NoResult();
 
-        var apiToken = await _dbContext.ApiTokens.SingleOrDefaultAsync(x => x.Token == apiKey && x.IsActive);
+        var apiToken = await _dbContext.ApiTokens.SingleOrDefaultAsync(x => x.Token == apiKey);
         if (apiToken == null)
             return AuthenticateResult.Fail("Invalid API Token");
+        
+        if(!apiToken.IsActive)
+            return AuthenticateResult.Fail("API Token is not active");
 
         var claims = new[] { new Claim(ClaimTypes.Name, apiToken.Description) };
         var identity = new ClaimsIdentity(claims, nameof(ApiAuthenticationHandler));

@@ -50,7 +50,7 @@ namespace API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ApiTokens");
+                    b.ToTable("ApiTokens", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Identity.ApplicationRole", b =>
@@ -230,7 +230,7 @@ namespace API.Migrations
                     b.HasIndex("Slug")
                         .IsUnique();
 
-                    b.ToTable("Restaurants");
+                    b.ToTable("Restaurants", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Review", b =>
@@ -284,7 +284,7 @@ namespace API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -406,21 +406,21 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Restaurant", b =>
                 {
-                    b.OwnsOne("API.Models.OpeningHours", "OpeningHours", b1 =>
+                    b.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours", "OpeningHours", b1 =>
                         {
                             b1.Property<Guid>("RestaurantId")
                                 .HasColumnType("uuid");
 
                             b1.HasKey("RestaurantId");
 
-                            b1.ToTable("Restaurants");
+                            b1.ToTable("Restaurants", (string)null);
 
                             b1.ToJson("OpeningHours");
 
                             b1.WithOwner()
                                 .HasForeignKey("RestaurantId");
 
-                            b1.OwnsOne("API.Models.Hours", "Friday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Friday#API.Models.Hours", "Friday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -433,13 +433,13 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");
                                 });
 
-                            b1.OwnsOne("API.Models.Hours", "Monday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Monday#API.Models.Hours", "Monday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -452,13 +452,13 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");
                                 });
 
-                            b1.OwnsOne("API.Models.Hours", "Saturday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Saturday#API.Models.Hours", "Saturday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -471,13 +471,13 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");
                                 });
 
-                            b1.OwnsOne("API.Models.Hours", "Sunday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Sunday#API.Models.Hours", "Sunday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -490,13 +490,13 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");
                                 });
 
-                            b1.OwnsOne("API.Models.Hours", "Thursday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Thursday#API.Models.Hours", "Thursday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -509,13 +509,13 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");
                                 });
 
-                            b1.OwnsOne("API.Models.Hours", "Tuesday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Tuesday#API.Models.Hours", "Tuesday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -528,13 +528,13 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");
                                 });
 
-                            b1.OwnsOne("API.Models.Hours", "Wednesday", b2 =>
+                            b1.OwnsOne("API.Models.Restaurant.OpeningHours#API.Models.OpeningHours.Wednesday#API.Models.Hours", "Wednesday", b2 =>
                                 {
                                     b2.Property<Guid>("OpeningHoursRestaurantId")
                                         .HasColumnType("uuid");
@@ -547,7 +547,7 @@ namespace API.Migrations
 
                                     b2.HasKey("OpeningHoursRestaurantId");
 
-                                    b2.ToTable("Restaurants");
+                                    b2.ToTable("Restaurants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("OpeningHoursRestaurantId");

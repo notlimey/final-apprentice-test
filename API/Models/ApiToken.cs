@@ -13,7 +13,7 @@ public class ApiToken
     public DateTime CreatedAt { get; set; }
     public DateTime? ExpiresAt { get; set; }
     
-    public bool IsActive { get => ExpiresAt == null || ExpiresAt > DateTime.UtcNow; }
+    public bool IsActive => ExpiresAt == null || ExpiresAt > DateTime.UtcNow;
     
     public string UserId { get; set; } = String.Empty;
     

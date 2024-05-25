@@ -1,6 +1,7 @@
 using API.DTOS.Restaurants;
 using API.Interfaces;
 using API.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(AuthenticationSchemes = $"ApiToken, {JwtBearerDefaults.AuthenticationScheme}")]
 public class RestaurantsController
 {
     private readonly IRestaurantService _restaurantService;
@@ -18,14 +20,12 @@ public class RestaurantsController
     }
     
     [HttpGet]
-    [Authorize]
     public async Task<List<Restaurant>> Get()
     {
         return await _restaurantService.GetRestaurantsAsync();
     }
 
     [HttpPost]
-    [Authorize]
     public async Task<Restaurant> Create([FromBody] CreateRestaurantDto dto)
     {
         var restaurant = new Restaurant()
