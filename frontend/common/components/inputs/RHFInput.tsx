@@ -1,8 +1,8 @@
-import { Override } from '@/common/types/extension.types';
+import type { Override } from '@/common/types/extension.types';
 // form
 import { useFormContext } from 'react-hook-form';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { Input, InputProps } from '../ui/input';
+import { Input, type InputProps } from '../ui/input';
 // @mui
 
 // ----------------------------------------------------------------------
@@ -10,8 +10,8 @@ import { Input, InputProps } from '../ui/input';
 type RHFTextFieldProps = {
 	id?: string;
 	name: string;
-    description?: string;
-    label?: string;
+	description?: string;
+	label?: string;
 };
 
 type Props = Override<InputProps, RHFTextFieldProps>;

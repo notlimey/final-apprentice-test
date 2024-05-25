@@ -35,7 +35,8 @@ const handler = async (req: Request) => {
         }
 
         // Attempt to parse JSON, but fall back to text if parsing fails
-        let data;
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        let data: any;
         try {
             data = await response.json();
         } catch (error) {

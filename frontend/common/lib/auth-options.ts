@@ -1,7 +1,7 @@
 import axios from "axios";
-import { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { AuthResponse, LoginDto } from "../types/auth.types";
+import type { AuthResponse, LoginDto } from "../types/auth.types";
 import { BASE_URL } from "./constants/api";
 
 export const authOptions: NextAuthOptions = {
@@ -57,12 +57,9 @@ export const authOptions: NextAuthOptions = {
                             image: data.user.avatarUrl,
                         };
 
-                        console.log(res)
-
                         return res;
-                    } else {
-                        return null;
                     }
+                    return null;
                 } catch (error) {
                     if (process.env.NODE_ENV === 'development') {
                         console.error('Error logging in', error);

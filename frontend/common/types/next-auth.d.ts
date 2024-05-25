@@ -1,4 +1,4 @@
-import { User } from 'next-auth';
+import type { User } from 'next-auth';
 import { TSTeam } from '@3steps-as/api-client/types';
 
 type UserId = string;
