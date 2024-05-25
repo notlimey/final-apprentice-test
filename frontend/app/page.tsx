@@ -25,7 +25,7 @@ export default async function Home() {
 					{data.map((restaurant) => (
 						<Link
 							key={restaurant.id}
-							href={`/restaurant/${restaurant.slug}`}
+							href={`/restaurants/${restaurant.slug}`}
 							className='bg-white w-full gap-y-3 rounded-md overflow-hidden shadow-md'
 						>
 							<img
@@ -37,7 +37,7 @@ export default async function Home() {
 								<h2 className='font-bold text-xl'>{restaurant.name}</h2>
 								<p>{restaurant.description}</p>
 								<div className='flex justify-end mt-4'>
-									<Rating value={3} hoverDisabled />
+									<Rating value={restaurant.averageOverallRating} hoverDisabled />
 								</div>
 							</div>
 						</Link>

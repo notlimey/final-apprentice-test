@@ -9,7 +9,7 @@ public interface IReviewService
     Task<Review?> GetPersonalReviewAsync(string userId, Guid restaurantId, bool includeRestaurant = false,
         bool includeUser = false);
 
-    Task<List<Review>> GetReviewsByRestaurantAsync(Guid resturantId, bool includeRestaurant = false,
+    Task<List<Review>> GetReviewsByRestaurantAsync(Guid restaurantId, bool includeRestaurant = false,
         bool includeUser = false);
 
     Task<List<Review>> GetReviewsByUserAsync(string userId, bool includeRestaurant = false, bool includeUser = false);

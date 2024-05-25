@@ -25,7 +25,7 @@ public class ReviewDto
     
     // relations
     
-    public RestaurantDto? Restaurant { get; set; }
+    // public RestaurantDto? Restaurant { get; set; }
     
     public UserDto? User { get; set; }
 }

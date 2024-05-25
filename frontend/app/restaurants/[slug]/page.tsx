@@ -1,7 +1,9 @@
+import ReviewList from '@/common/components/reviews/ReviewList';
 import { BASE_URL } from '@/common/lib/constants/api';
 import type { Restaurant } from '@/common/types/restaurants.types';
 import axios from 'axios';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 type Props = {
 	params: {
@@ -34,6 +36,9 @@ export default async function RestaurantsPage(props: Props) {
 						className='w-full aspect-w-16 aspect-h-9 object-cover'
 					/>
 				</div>
+				<Suspense fallback={<p>Loading reviews...</p>}>
+					<ReviewList restaurantId={restaurant.id} />
+				</Suspense>
 			</div>
 		</>
 	);

@@ -28,11 +28,11 @@ public class ReviewService : IReviewService
             .FirstOrDefaultAsync(r => r.UserId == userId && r.RestaurantId == restaurantId);
     }
 
-    public async Task<List<Review>> GetReviewsByRestaurantAsync(Guid resturantId, bool includeRestaurant = false, bool includeUser = false)
+    public async Task<List<Review>> GetReviewsByRestaurantAsync(Guid restaurantId, bool includeRestaurant = false, bool includeUser = false)
     {
         var query = GetReviewsQuery(includeUser, includeRestaurant);
         
-        return await query.Where(x => x.RestaurantId == resturantId).ToListAsync();
+        return await query.Where(x => x.RestaurantId == restaurantId).ToListAsync();
     }
 
     public async Task<List<Review>> GetReviewsByUserAsync(string userId, bool includeRestaurant = false, bool includeUser = false)

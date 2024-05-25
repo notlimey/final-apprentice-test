@@ -2,9 +2,9 @@ export type BaseUser = {
     id: string;
     firstName: string;
     lastName: string;
-    avatarUrl: string;
     userName: string;
     email: string;
+    avatarUrl: string;
 };
 
 export type AuthResponse = {

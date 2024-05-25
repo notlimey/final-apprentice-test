@@ -17,6 +17,11 @@ export type Restaurant = {
     latitude: number;
     longitude: number;
     summary: string;
+    averageFoodQualityRating: number;
+    averageServiceQualityRating: number;
+    averageAmbianceRating: number;
+    averageValueForMoneyRating: number;
+    averageOverallRating: number;
 };
 
 

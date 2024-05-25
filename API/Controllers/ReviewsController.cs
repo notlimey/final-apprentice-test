@@ -31,7 +31,7 @@ public class ReviewsController
         _accessor = accessor;
     }
 
-    [HttpGet("Resturant/{id}")]
+    [HttpGet("Restaurant/{id}")]
     [AllowAnonymous]
     public async Task<List<ReviewDto>> GetByRestaurant(Guid id)
     {
