@@ -16,3 +16,13 @@ export type LoginDto = {
     username: string;
     password: string;
 }
+
+export type RegisterDto = {
+    userName: string;
+    email: string;
+    password: string;
+    isAnonymous: boolean;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string;
+}
