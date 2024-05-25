@@ -44,12 +44,23 @@ public class Restaurant
     // LLM generated summary based on all information and reviews
     public string Summary { get; set; } = string.Empty;
     
+    public double AverageFoodQualityRating { get; set; }
+    
+    public double AverageServiceQualityRating { get; set; }
+    
+    public double AverageAmbianceRating { get; set; }
+    
+    public double AverageValueForMoneyRating { get; set; }
+    
+    public double AverageOverallRating { get; set; }
+    
+    public int NumberOfReviews { get; set; }
     
     public DateTimeOffset CreatedAt { get; set; }
     
     public DateTimeOffset UpdatedAt { get; set; }
     
     // relations
-    public IEnumerable<Review> Reviews { get; set; } = [];
+    public List<Review> Reviews { get; set; } = new List<Review>();
 }
 

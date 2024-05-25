@@ -1,3 +1,4 @@
+import Rating from '@/common/components/inputs/RatingComponent';
 import { BASE_URL } from '@/common/lib/constants/api';
 import { getCurrentSession, getCurrentUser } from '@/common/lib/session';
 import type { Restaurant } from '@/common/types/restaurants.types';
@@ -25,16 +26,19 @@ export default async function Home() {
 						<Link
 							key={restaurant.id}
 							href={`/restaurant/${restaurant.slug}`}
-							className='bg-white w-full gap-y-3 rounded-md overflow-hidden'
+							className='bg-white w-full gap-y-3 rounded-md overflow-hidden shadow-md'
 						>
 							<img
 								src={restaurant.imageUrl}
 								alt={restaurant.name}
-								className=' w-fullaspect-video object-cover'
+								className=' w-full aspect-video object-cover object-top'
 							/>
 							<div className='px-5 py-3'>
 								<h2 className='font-bold text-xl'>{restaurant.name}</h2>
 								<p>{restaurant.description}</p>
+								<div className='flex justify-end mt-4'>
+									<Rating value={3} hoverDisabled />
+								</div>
 							</div>
 						</Link>
 					))}

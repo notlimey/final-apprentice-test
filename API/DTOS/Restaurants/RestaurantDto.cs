@@ -38,6 +38,16 @@ public class RestaurantDto
     
     // LLM generated summary based on all information and reviews
     public string Summary { get; set; } = string.Empty;
+    
+    public double AverageFoodQualityRating { get; set; }
+    
+    public double AverageServiceQualityRating { get; set; }
+    
+    public double AverageAmbianceRating { get; set; }
+    
+    public double AverageValueForMoneyRating { get; set; }
+    
+    public double AverageOverallRating { get; set; }
 
     public IEnumerable<ReviewDto> Reviews { get; set; } = [];
 }

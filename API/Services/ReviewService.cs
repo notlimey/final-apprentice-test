@@ -1,4 +1,5 @@
 using API.Data;
+using API.Extensions.Restaurant;
 using API.Interfaces;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,12 @@ public class ReviewService : IReviewService
         return await query.FirstOrDefaultAsync(x => x.Id == id);
     }
 
+    public async Task<Review?> GetPersonalReviewAsync(string userId, Guid restaurantId, bool includeRestaurant = false, bool includeUser = false)
+    {
+        return await _dbContext.Reviews
+            .FirstOrDefaultAsync(r => r.UserId == userId && r.RestaurantId == restaurantId);
+    }
+
     public async Task<List<Review>> GetReviewsByRestaurantAsync(Guid resturantId, bool includeRestaurant = false, bool includeUser = false)
     {
         var query = GetReviewsQuery(includeUser, includeRestaurant);
@@ -37,8 +44,22 @@ public class ReviewService : IReviewService
 
     public async Task<bool> CreateReviewAsync(Review review)
     {
-        await _dbContext.Reviews.AddAsync(review);
-        return await _dbContext.SaveChangesAsync() > 0;
+        var restaurant = await _dbContext.Restaurants.FindAsync(review.RestaurantId);
+        if (restaurant == null)
+        {
+            throw new InvalidOperationException("Restaurant not found");
+        }
+
+        restaurant.AddRating(review, restaurant.NumberOfReviews);
+        restaurant.NumberOfReviews++;
+
+        restaurant.Reviews.Append(review);
+
+        _dbContext.Entry(restaurant).State = EntityState.Modified;
+        _dbContext.Entry(review).State = EntityState.Added;
+        await _dbContext.SaveChangesAsync();
+
+        return true;
     }
 
     public async Task<bool> UpdateReviewAsync(Review review)

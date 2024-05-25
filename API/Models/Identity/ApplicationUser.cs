@@ -12,7 +12,16 @@ public class ApplicationUser : IdentityUser
     
     public string AvatarUrl { get; set; } = String.Empty;
     
+    public RatingStyle RatingStyle { get; set; } = RatingStyle.Star;
+    
     public IEnumerable<ApiToken> ApiTokens { get; set; } = new List<ApiToken>();
     
     public IEnumerable<Review> Reviews { get; set; } = new List<Review>();
+}
+
+public enum RatingStyle
+{
+    Star,
+    Emoji,
+    Meme
 }
