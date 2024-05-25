@@ -28,8 +28,13 @@ public class AuthController
     [HttpPost("login")]
     public async Task<LoginResultDto> Login([FromBody] LoginDto model)
     {
-        var user = await _userManager.FindByEmailAsync(model.Email);
-        if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+        var user = await _userManager.FindByEmailAsync(model.Email) ?? 
+                   await _userManager.FindByNameAsync(model.Email);
+        
+        if(user is null)
+            throw new Exception("Invalid login attempt");
+        
+        if (await _userManager.CheckPasswordAsync(user, model.Password))
         {
             var token = GenerateJwtToken(user);
             return new LoginResultDto()
