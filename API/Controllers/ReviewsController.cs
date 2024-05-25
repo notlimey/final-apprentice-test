@@ -29,6 +29,7 @@ public class ReviewsController
     }
 
     [HttpGet("Resturant/{id}")]
+    [AllowAnonymous]
     public async Task<List<ReviewDto>> GetByRestaurant(Guid id)
     {
         var result = await _reviewService.GetReviewsByRestaurantAsync(id, includeUser: true);

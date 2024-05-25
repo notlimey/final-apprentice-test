@@ -21,6 +21,7 @@ public class RestaurantsController
     }
     
     [HttpGet]
+    [AllowAnonymous]
     public async Task<List<RestaurantDto>> Get()
     {
         var results = await _restaurantService.GetRestaurantsAsync();
@@ -28,6 +29,7 @@ public class RestaurantsController
     }
     
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<RestaurantDto> Get(Guid id)
     {
         var restaurant = await _restaurantService.GetRestaurantByIdAsync(id);
