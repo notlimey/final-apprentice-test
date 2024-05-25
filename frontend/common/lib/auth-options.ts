@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { AuthResponse } from "../types/auth.types";
+import { AuthResponse, LoginDto } from "../types/auth.types";
 import { BASE_URL } from "./constants/api";
 
 export const authOptions: NextAuthOptions = {
@@ -15,6 +15,22 @@ export const authOptions: NextAuthOptions = {
         signOut: "/auth/signout",
     },
 
+    callbacks: {
+        jwt: async ({ token, user }) => {
+            if (user) {
+                token.id = user.id;
+                token.access_token = user.access_token;
+                token.expires_at = user.expires_at;
+            }
+
+            return token;
+        },
+        session: async ({ session, token }) => {
+            session.user = token;
+            return session;
+        }
+    },
+
     providers: [
         CredentialsProvider({
             credentials: {
@@ -22,7 +38,7 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             authorize: async (credentials, req) => {
-                const { username, password } = credentials as { username: string, password: string };
+                const { username, password } = credentials as LoginDto;
 
                 try {
                     const { data, status } = await axios.post<AuthResponse>(`${BASE_URL}Auth/login`, {
@@ -32,7 +48,7 @@ export const authOptions: NextAuthOptions = {
 
                     if (status === 200) {
 
-                        return {
+                        const res = {
                             id: data.user.id,
                             access_token: data.authToken,
                             expires_at: Date.now() + 1000 * 60 * 60 * 24 * 30, // 30 days
@@ -40,6 +56,10 @@ export const authOptions: NextAuthOptions = {
                             name: data.user.userName,
                             image: data.user.avatarUrl,
                         };
+
+                        console.log(res)
+
+                        return res;
                     } else {
                         return null;
                     }

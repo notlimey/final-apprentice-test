@@ -11,3 +11,8 @@ export type AuthResponse = {
     authToken: string;
     user: BaseUser;
 };
+
+export type LoginDto = {
+    username: string;
+    password: string;
+}
