@@ -4,6 +4,7 @@ using API.Interfaces;
 using API.Mappings.Reviews;
 using API.Models;
 using API.Models.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(AuthenticationSchemes = $"ApiToken, {JwtBearerDefaults.AuthenticationScheme}")]
 public class ReviewsController
 {
     private readonly IReviewService _reviewService;
@@ -27,7 +29,6 @@ public class ReviewsController
     }
 
     [HttpGet("Resturant/{id}")]
-    [Authorize]
     public async Task<List<ReviewDto>> GetByRestaurant(Guid id)
     {
         var result = await _reviewService.GetReviewsByRestaurantAsync(id, includeUser: true);
@@ -36,28 +37,22 @@ public class ReviewsController
     }
     
     [HttpGet("User/{id}")]
-    [Authorize]
     public async Task<List<Review>> GetByUser(string id)
     {
         return await _reviewService.GetReviewsByUserAsync(id, includeRestaurant: true);
     }
     
-    [HttpPost]
-    [Authorize]
-    public async Task<bool> Create([FromBody] CreateReviewDto dto)
+    [HttpPost("{restaurantId}")]
+    public async Task<bool> Create([FromBody] CreateReviewDto dto, string restaurantId)
     {
-        // TODO: Get help from Eirik figuring out why nameidentifier is string and not guid
+        var id = _accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (id == null) throw new Exception("User id not found");
+        var user = await  _userManager.FindByIdAsync(id);
         
-        // var id = _accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        // Console.WriteLine($"User ID: {id}");
-        // var user =await  _userManager.FindByIdAsync(id);
-        //
-        // if (user == null)
-        //     throw new Exception("User not found");
-
-        var firstUser = await _userManager.Users.Take(1).FirstOrDefaultAsync();
-        if (firstUser == null)
+        if (user == null)
             throw new Exception("User not found");
+
+        Guid.TryParse(restaurantId, out var guid);
 
         var review = new Review()
         {
@@ -69,8 +64,8 @@ public class ReviewsController
             ValueForMoneyRating = dto.ValueForMoneyRating,
             OverallRating = dto.OverallRating,
             Comment = dto.Comment,
-            RestaurantId = dto.RestaurantId,
-            UserId = firstUser.Id,
+            RestaurantId = guid,
+            UserId = user.Id,
             CreatedAt = DateTimeOffset.UtcNow,
             UpdatedAt = DateTimeOffset.UtcNow
         };
@@ -83,4 +78,15 @@ public class ReviewsController
         return success;
     }
     
+    [HttpDelete]
+    public async Task<bool> Delete(Guid id)
+    {
+        
+        var success = await _reviewService.DeleteReviewAsync(id);
+        
+        if(!success)
+            throw new Exception("Failed to delete review");
+        
+        return success;
+    }
 }

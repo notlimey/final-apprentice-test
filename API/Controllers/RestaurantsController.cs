@@ -1,5 +1,6 @@
 using API.DTOS.Restaurants;
 using API.Interfaces;
+using API.Mappings.Restaurant;
 using API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -20,13 +21,24 @@ public class RestaurantsController
     }
     
     [HttpGet]
-    public async Task<List<Restaurant>> Get()
+    public async Task<List<RestaurantDto>> Get()
     {
-        return await _restaurantService.GetRestaurantsAsync();
+        var results = await _restaurantService.GetRestaurantsAsync();
+        return results.ToDtos();
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<RestaurantDto> Get(Guid id)
+    {
+        var restaurant = await _restaurantService.GetRestaurantByIdAsync(id);
+        if (restaurant == null)
+            throw new Exception("Restaurant not found");
+
+        return restaurant.ToDto();
     }
 
     [HttpPost]
-    public async Task<Restaurant> Create([FromBody] CreateRestaurantDto dto)
+    public async Task<RestaurantDto> Create([FromBody] CreateRestaurantDto dto)
     {
         var restaurant = new Restaurant()
         {
@@ -47,12 +59,11 @@ public class RestaurantsController
             CreatedAt = DateTimeOffset.UtcNow,
             UpdatedAt = DateTimeOffset.UtcNow
         };
-        
+
         var success = await _restaurantService.CreateRestaurantAsync(restaurant);
         if (!success)
             throw new Exception("Failed to create restaurant");
 
-        return restaurant;
+        return restaurant.ToDto();
     }
-    
 }

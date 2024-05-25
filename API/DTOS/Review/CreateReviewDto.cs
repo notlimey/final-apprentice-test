@@ -17,6 +17,4 @@ public class CreateReviewDto
     public int OverallRating { get; set; }
     
     public string Comment { get; set; } = String.Empty;
-    
-    public Guid RestaurantId { get; set; }
 }

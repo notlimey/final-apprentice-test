@@ -1,18 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using API.DTOS.Review;
 
-namespace API.Models;
+namespace API.DTOS.Restaurants;
 
-public class Restaurant
+public class RestaurantDto
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     
     public string Name { get; set; } = string.Empty;
     
-    [Required]
-    [MaxLength(100)]
     public string Slug { get; set; } = string.Empty;
     
     public string Description { get; set; } = string.Empty;
@@ -35,7 +30,7 @@ public class Restaurant
     public string ImageUrl { get; set; } = string.Empty;
     
     // Add a json property for opening hours
-    public OpeningHours OpeningHours { get; set; } = null!;
+    public OpeningHoursDto OpeningHours { get; set; } = null!;
     
     public double Latitude { get; set; }
     
@@ -43,13 +38,6 @@ public class Restaurant
     
     // LLM generated summary based on all information and reviews
     public string Summary { get; set; } = string.Empty;
-    
-    
-    public DateTimeOffset CreatedAt { get; set; }
-    
-    public DateTimeOffset UpdatedAt { get; set; }
-    
-    // relations
-    public IEnumerable<Review> Reviews { get; set; } = [];
-}
 
+    public IEnumerable<ReviewDto> Reviews { get; set; } = [];
+}

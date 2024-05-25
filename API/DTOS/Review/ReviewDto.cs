@@ -1,6 +1,5 @@
 using API.DTOS.Identity;
-using API.Models;
-using API.Models.Identity;
+using API.DTOS.Restaurants;
 
 namespace API.DTOS.Review;
 
@@ -26,7 +25,7 @@ public class ReviewDto
     
     // relations
     
-    public Restaurant? Restaurant { get; set; }
+    public RestaurantDto? Restaurant { get; set; }
     
     public UserDto? User { get; set; }
 }

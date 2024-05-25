@@ -22,6 +22,8 @@ builder.Services.AddAuth(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerSecurity(builder.Configuration);
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 
