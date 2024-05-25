@@ -28,15 +28,25 @@ public class RestaurantsController
         return results.ToDtos();
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{slugOrId}")]
     [AllowAnonymous]
-    public async Task<RestaurantDto> Get(Guid id)
+    public async Task<RestaurantDto> Get(string slugOrId)
     {
-        var restaurant = await _restaurantService.GetRestaurantByIdAsync(id);
-        if (restaurant == null)
-            throw new Exception("Restaurant not found");
+        if (Guid.TryParse(slugOrId, out var id))
+        {
+            var restaurant = await _restaurantService.GetRestaurantByIdAsync(id);
+            if (restaurant == null)
+                throw new Exception("Restaurant not found");
 
-        return restaurant.ToDto();
+            return restaurant.ToDto();
+        }
+        
+        var restaurantBySlug = await _restaurantService.GetRestaurantBySlugAsync(slugOrId);
+        
+        if (restaurantBySlug == null)
+            throw new Exception("Restaurant not found");
+        
+        return restaurantBySlug.ToDto();
     }
 
     [HttpPost]

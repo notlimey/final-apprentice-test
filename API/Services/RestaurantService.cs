@@ -19,6 +19,11 @@ public class RestaurantService : IRestaurantService
         return await _dbContext.Restaurants.FindAsync(id);
     }
 
+    public async Task<Restaurant?> GetRestaurantBySlugAsync(string slug)
+    {
+        return await _dbContext.Restaurants.FirstOrDefaultAsync(x => x.Slug == slug);
+    }
+
     public async Task<List<Restaurant>> GetRestaurantsAsync()
     {
         return await _dbContext.Restaurants.ToListAsync();

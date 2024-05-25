@@ -5,6 +5,8 @@ namespace API.Interfaces;
 public interface IRestaurantService
 {
     Task<Restaurant?> GetRestaurantByIdAsync(Guid id);
+
+    Task<Restaurant?> GetRestaurantBySlugAsync(string slug);
     
     Task<List<Restaurant>> GetRestaurantsAsync();
     
