@@ -1,3 +1,4 @@
+using API.DTOS.Restaurants;
 using API.Interfaces;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,60 +16,43 @@ public class RestaurantsController
     {
         _restaurantService = restaurantService;
     }
-
-    [HttpGet("/")]
+    
+    [HttpGet]
     [Authorize]
-    public IEnumerable<Restaurant> GetAll()
+    public async Task<List<Restaurant>> Get()
     {
-        var restaurants = new List<Restaurant>
+        return await _restaurantService.GetRestaurantsAsync();
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<Restaurant> Create([FromBody] CreateRestaurantDto dto)
+    {
+        var restaurant = new Restaurant()
         {
-            new Restaurant
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test Restaurant",
-                Description = "This is a test restaurant",
-                FoodType = "Test Food",
-                Address = "Test Address",
-                State = "Innlandet",
-                City = "Test City",
-                ZipCode = "1234",
-                PhoneNumber = "12345678",
-                Website = "https://test.com",
-                ImageUrl = "https://test.com/image.jpg",
-                OpeningHours = new OpeningHours {
-                    Monday = new Hours {OpensAt = TimeSpan.FromHours(8), ClosesAt = TimeSpan.FromHours(20)},
-                    Tuesday = new Hours {OpensAt = TimeSpan.FromHours(8), ClosesAt = TimeSpan.FromHours(20)},
-                    Wednesday = new Hours {OpensAt = TimeSpan.FromHours(8), ClosesAt = TimeSpan.FromHours(20)},
-                    Thursday = new Hours {OpensAt = TimeSpan.FromHours(8), ClosesAt = TimeSpan.FromHours(20)},
-                    Friday = new Hours {OpensAt = TimeSpan.FromHours(8), ClosesAt = TimeSpan.FromHours(20)},
-                },
-                Latitude = 60.1234,
-                Longitude = 10.1234,
-                Summary = "This is a test restaurant",
-                CreatedAt = DateTimeOffset.Now,
-                UpdatedAt = DateTimeOffset.Now,
-                Reviews = new List<Review>
-                {
-                    new Review
-                    {
-                        Id = Guid.NewGuid(),
-                        Title = "Test Review",
-                        DateVisited = DateOnly.FromDateTime(DateTime.Now),
-                        FoodQualityRating = 5,
-                        ServiceQualityRating = 5,
-                        AmbianceRating = 5,
-                        ValueForMoneyRating = 5,
-                        OverallRating = 5,
-                        Comment = "This is a test review",
-                        CreatedAt = DateTimeOffset.Now,
-                        UpdatedAt = DateTimeOffset.Now,
-                        RestaurantId = Guid.NewGuid()
-                    }
-                }
-            }
+            Name = dto.Name,
+            Slug = dto.Slug,
+            Description = dto.Description,
+            FoodType = dto.FoodType,
+            Address = dto.Address,
+            State = dto.State,
+            City = dto.City,
+            ZipCode = dto.ZipCode,
+            PhoneNumber = dto.PhoneNumber,
+            Website = dto.Website,
+            ImageUrl = dto.ImageUrl,
+            OpeningHours = dto.OpeningHours,
+            Latitude = dto.Latitude,
+            Longitude = dto.Longitude,
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
         };
         
-        return restaurants;
+        var success = await _restaurantService.CreateRestaurantAsync(restaurant);
+        if (!success)
+            throw new Exception("Failed to create restaurant");
+
+        return restaurant;
     }
     
 }

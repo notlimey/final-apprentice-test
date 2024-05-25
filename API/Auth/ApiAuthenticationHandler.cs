@@ -27,6 +27,7 @@ public class ApiAuthenticationHandler: AuthenticationHandler<AuthenticationSchem
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
+        Console.WriteLine($"Header: {Request.Headers["ApiKey"]}");
         if (!Request.Headers.ContainsKey("ApiKey"))
             return AuthenticateResult.NoResult();
 
