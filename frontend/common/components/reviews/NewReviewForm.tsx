@@ -17,6 +17,7 @@ import RHFTextarea from '../inputs/RHFTextarea';
 import RHFRatingComponent from '../inputs/RHFRatingComponent';
 import { createReview } from '@/common/lib/reviews';
 import AddRestaurantDish from './AddRestaurantDish';
+import { useToast } from '../ui/use-toast';
 
 const Schema = z.object({
 	title: z.string().min(1, 'Minimum 1 tegn').max(50, 'Maks 50 tegn'),
@@ -51,12 +52,30 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 		},
 	});
 
+	const { toast } = useToast();
+
 	const onSubmit = async (data: CreateReviewDto) => {
-		await createReview(restaurantId, data);
+		try {
+			await createReview(restaurantId, data);
 
-		form.reset();
+			form.reset();
 
-		window.location.reload();
+			toast({
+				title: 'Anmeldelse lagret',
+				description: 'Anmeldelsen din har blitt lagret.',
+			});
+
+			window.location.reload();
+		} catch (error) {
+			toast({
+				title: 'Noe gikk galt',
+				description: `Kunne ikke legge til restauranten${
+					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					(error as any)?.message
+				}`,
+				variant: 'destructive',
+			});
+		}
 	};
 
 	return (
