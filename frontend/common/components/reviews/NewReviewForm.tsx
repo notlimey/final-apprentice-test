@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Card, CardTitle } from '../ui/card';
-import { Form, FormField, FormItem } from '../ui/form';
+import { Form, FormField, FormItem, FormMessage } from '../ui/form';
 import RHFInput from '../inputs/RHFInput';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Button } from '../ui/button';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, Plus, X } from 'lucide-react';
 import clsx from 'clsx';
 import { Calendar } from '../ui/calendar';
 import { format } from 'date-fns';
@@ -16,18 +16,23 @@ import { Label } from '../ui/label';
 import RHFTextarea from '../inputs/RHFTextarea';
 import RHFRatingComponent from '../inputs/RHFRatingComponent';
 import { createReview } from '@/common/lib/reviews';
+import AddRestaurantDish from './AddRestaurantDish';
 
 const Schema = z.object({
-	title: z.string(),
-	dateVisited: z.date().transform((val) => {
-		return val.toISOString().split('T')[0];
-	}),
-	foodQualityRating: z.number().int().min(1).max(5),
-	serviceQualityRating: z.number().int().min(1).max(5),
-	ambianceRating: z.number().int().min(1).max(5),
-	valueForMoneyRating: z.number().int().min(1).max(5),
-	overallRating: z.number().int().min(1).max(5),
-	comment: z.string().min(1).max(500),
+	title: z.string().min(1, 'Minimum 1 tegn').max(50, 'Maks 50 tegn'),
+	dateVisited: z
+		.date()
+		.max(new Date(), 'Datoen må være i dag eller tidligere')
+		.transform((val) => {
+			return val.toISOString().split('T')[0];
+		}),
+	foodQualityRating: z.number().int().min(1, 'Påkrevd').max(5),
+	serviceQualityRating: z.number().int().min(1, 'Påkrevd').max(5),
+	ambianceRating: z.number().int().min(1, 'Påkrevd').max(5),
+	valueForMoneyRating: z.number().int().min(1, 'Påkrevd').max(5),
+	overallRating: z.number().int().min(1, 'Påkrevd').max(5),
+	comment: z.string().min(1, 'Minimum 1 tegn').max(500, 'Maks 500 tegn'),
+	dishNames: z.array(z.string()).min(1, 'Legg til minst én rett'),
 });
 
 export default function NewReviewForm({ restaurantId }: { restaurantId: string }) {
@@ -42,6 +47,7 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 			valueForMoneyRating: 0,
 			overallRating: 0,
 			comment: '',
+			dishNames: [],
 		},
 	});
 
@@ -96,6 +102,7 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 										/>
 									</PopoverContent>
 								</Popover>
+								<FormMessage />
 							</FormItem>
 						)}
 					/>
@@ -103,6 +110,7 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 						name='comment'
 						label='Kommentar'
 						wrapperClassName='md:col-span-2 lg:row-span-3'
+						description={`Max 500 tegn. Du har ${500 - form.watch('comment').length} tegn igjen.`}
 						rows={8}
 					/>
 					<RHFRatingComponent name='foodQualityRating' label='Matkvalitet' />
@@ -110,13 +118,51 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 					<RHFRatingComponent name='ambianceRating' label='Atmosfære' />
 					<RHFRatingComponent name='valueForMoneyRating' label='Pris' />
 					<RHFRatingComponent name='overallRating' label='Totalvurdering' />
+					<FormField
+						name='dishNames'
+						control={form.control}
+						render={({ field }) => (
+							<FormItem className='col-span-3'>
+								<div className='flex flex-wrap gap-3'>
+									{field.value?.map((dish, index) => (
+										<div
+											// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+											key={index}
+											className='inline-flex items-center gap-x-1 px-3 py-1 text-sm rounded-full bg-gray-100'
+										>
+											{dish}
+											<button
+												type='button'
+												onClick={() => {
+													form.setValue(
+														'dishNames',
+														field.value.filter((_, i) => i !== index),
+													);
+												}}
+											>
+												<X className='size-3' />
+											</button>
+										</div>
+									))}
+									<AddRestaurantDish
+										onAdd={(dish) => {
+											form.setValue('dishNames', [...field.value, dish]);
+										}}
+									>
+										<button
+											type='button'
+											className='inline-flex items-center gap-x-1 px-3 py-1 text-sm rounded-full bg-gray-100 border'
+										>
+											Legg til rett <Plus className='size-3' />
+										</button>
+									</AddRestaurantDish>
+								</div>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
 
-					<Button
-						type='submit'
-						color='primary'
-						className='md:col-span-2 lg:col-span-4'
-						disabled={!form.formState.isValid}
-					>
+					<Button type='submit' color='primary' className='md:col-span-2 lg:col-span-4'>
 						Lagre
 					</Button>
 				</form>
