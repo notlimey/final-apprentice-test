@@ -31,7 +31,7 @@ const ReviewListItem = ({ review, onDelete }: { review: ReviewType; onDelete?: (
 			key={review.id}
 			className={clsx(
 				'bg-white group p-5 rounded-md shadow-md mt-5 border',
-				isPersonal ? 'border-2 border-blue-500' : 'border-primary',
+				isPersonal && 'border-2 border-blue-500',
 				isDeleting && 'opacity-50 pointer-events-none',
 			)}
 		>

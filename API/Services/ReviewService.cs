@@ -67,14 +67,31 @@ public class ReviewService : IReviewService
         _dbContext.Reviews.Update(review);
         return await _dbContext.SaveChangesAsync() > 0;
     }
-
+    
     public async Task<bool> DeleteReviewAsync(Guid id)
     {
         var review = await _dbContext.Reviews.FindAsync(id);
-        if (review == null) return false;
+        if (review == null)
+        {
+            throw new InvalidOperationException("Review not found");
+        }
         
-        _dbContext.Reviews.Remove(review);
-        return await _dbContext.SaveChangesAsync() > 0;
+        var restaurant = await _dbContext.Restaurants.FindAsync(review.RestaurantId);
+        if (restaurant == null)
+        {
+            throw new InvalidOperationException("Restaurant not found");
+        }
+
+        restaurant.RemoveRating(review, restaurant.NumberOfReviews);
+        restaurant.NumberOfReviews--;
+
+        restaurant.Reviews.Remove(review);
+
+        _dbContext.Entry(restaurant).State = EntityState.Modified;
+        _dbContext.Entry(review).State = EntityState.Deleted;
+        await _dbContext.SaveChangesAsync();
+
+        return true;
     }
     
     private IQueryable<Review> GetReviewsQuery(bool includeUser = false, bool includeRestaurant = false)
