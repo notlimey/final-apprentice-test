@@ -11,7 +11,7 @@ export default function CreateNewReviewCard({
 	restaurantId,
 	personal,
 }: { restaurantId: string; personal?: Review | null }) {
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	if (personal) return null;
 

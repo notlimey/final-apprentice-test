@@ -1,12 +1,12 @@
 import { fetchApi } from '@/common/lib/api';
 import type { Review } from '@/common/types/reviews.types';
-import ReviewListItem from './ReviewListItem';
-import { Card, CardHeader } from '../ui/card';
 import CreateNewReviewCard from './CreateNewReviewCard';
+import ReviewListItem from './ReviewListItem';
 
 const getReviews = async (restaurantId: string) => {
+	console.log('restaurantId', restaurantId);
 	const reviews = await fetchApi<Review[]>(`Reviews/Restaurant/${restaurantId}`);
-	const personal = await fetchApi<Review>(`Reviews/Personal/${restaurantId}`);
+	const personal = await fetchApi<Review>(`Reviews/Personal/${restaurantId}`).catch(() => null);
 
 	return [reviews?.data, personal?.data as null | Review] as const;
 };

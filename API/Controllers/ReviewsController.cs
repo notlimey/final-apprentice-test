@@ -61,8 +61,8 @@ public class ReviewsController
         var result = await _reviewService.GetPersonalReviewAsync(user.Id, guid, includeRestaurant: true);
 
         if (result != null) return result.ToDto();
-        
-        throw new Exception("Review not found");
+
+        throw new HttpRequestException("Review not found");
     }
     
     [HttpPost("{restaurantId}")]
