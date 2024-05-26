@@ -20,10 +20,10 @@ public static partial class AuthenticationServicesExtension
         }
         
         var key = Encoding.ASCII.GetBytes(jwtSettingKey);
-        
+
         return services.AddAuthentication(options =>
             {
-                
+
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
@@ -41,6 +41,11 @@ public static partial class AuthenticationServicesExtension
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             })
-            .AddScheme<AuthenticationSchemeOptions, ApiAuthenticationHandler>("ApiToken", null);
+            .AddScheme<AuthenticationSchemeOptions, ApiAuthenticationHandler>("ApiToken", null)
+            .AddGoogle(options =>
+            {
+                options.ClientId = configuration["Authentication:Google:ClientId"];
+                options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
     }
 }
