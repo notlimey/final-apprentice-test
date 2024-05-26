@@ -13,6 +13,7 @@ export type Review = {
     comment: string;
     restaurant?: Restaurant;
     user?: BaseUser;
+    dishNames: string[];
 };
 
 export type CreateReviewDto = {

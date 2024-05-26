@@ -100,7 +100,8 @@ public class ReviewsController
             RestaurantId = guid,
             UserId = user.Id,
             CreatedAt = DateTimeOffset.UtcNow,
-            UpdatedAt = DateTimeOffset.UtcNow
+            UpdatedAt = DateTimeOffset.UtcNow,
+            DishNames = dto.DishNames
         };
 
         var success = await _reviewService.CreateReviewAsync(review);

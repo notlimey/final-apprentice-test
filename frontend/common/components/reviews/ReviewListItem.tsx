@@ -59,6 +59,12 @@ const ReviewListItem = ({ review, onDelete }: { review: ReviewType; onDelete?: (
 							</div>
 						)}
 					</div>
+					<div className='pt-2'>
+						<p className='text-sm'>
+							{review.dishNames.length > 1 ? 'Retter: ' : 'Rett: '}
+							<span className='font-semibold'>{review.dishNames.join(', ')}</span>
+						</p>
+					</div>
 				</div>
 			</div>
 			{review.user && (
