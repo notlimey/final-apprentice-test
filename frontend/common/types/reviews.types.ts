@@ -24,4 +24,5 @@ export type CreateReviewDto = {
     valueForMoneyRating: number;
     overallRating: number;
     comment: string;
+    dishNames: string[];
 }
