@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Star } from 'lucide-react';
 import { useState } from 'react';
 
-type RatingProps = {
+export type RatingProps = {
 	value: number;
 	onChange?: (value: number) => void;
 	size?: number;

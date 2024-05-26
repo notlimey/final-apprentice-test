@@ -1,9 +1,9 @@
 import type { Override } from '@/common/types/extension.types';
+import clsx from 'clsx';
 // form
 import { useFormContext } from 'react-hook-form';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { Input, type InputProps } from '../ui/input';
-import clsx from 'clsx';
+import { Textarea, type TextareaProps } from '../ui/textarea';
 // @mui
 
 // ----------------------------------------------------------------------
@@ -16,9 +16,9 @@ type RHFTextFieldProps = {
 	wrapperClassName?: string;
 };
 
-type Props = Override<InputProps, RHFTextFieldProps>;
+type Props = Override<TextareaProps, RHFTextFieldProps>;
 
-export default function RHFInput({ name, wrapperClassName, ...other }: Props) {
+export default function RHFTextarea({ name, wrapperClassName, ...other }: Props) {
 	const { control } = useFormContext();
 
 	return (
@@ -29,7 +29,7 @@ export default function RHFInput({ name, wrapperClassName, ...other }: Props) {
 				<FormItem className={clsx(wrapperClassName)}>
 					{other.label && <FormLabel>{other.label}</FormLabel>}
 					<FormControl>
-						<Input {...field} {...other} />
+						<Textarea {...field} {...other} />
 					</FormControl>
 					{other.description && <FormDescription>{other.description}</FormDescription>}
 					<FormMessage />

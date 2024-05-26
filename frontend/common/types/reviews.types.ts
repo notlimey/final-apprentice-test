@@ -17,7 +17,7 @@ export type Review = {
 
 export type CreateReviewDto = {
     title: string;
-    dateVisited: string;
+    dateVisited: Date;
     foodQualityRating: number;
     serviceQualityRating: number;
     ambianceRating: number;

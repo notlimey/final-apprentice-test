@@ -1,24 +1,22 @@
 import type { Override } from '@/common/types/extension.types';
-// form
-import { useFormContext } from 'react-hook-form';
+import type { RatingProps } from './RatingComponent';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
-import { Input, type InputProps } from '../ui/input';
+import { useFormContext } from 'react-hook-form';
 import clsx from 'clsx';
-// @mui
+import RatingComponent from './RatingComponent';
 
-// ----------------------------------------------------------------------
-
-type RHFTextFieldProps = {
+type RHFRatingComponentProps = {
 	id?: string;
 	name: string;
 	description?: string;
 	label?: string;
 	wrapperClassName?: string;
+	value?: number;
 };
 
-type Props = Override<InputProps, RHFTextFieldProps>;
+type Props = Override<RatingProps, RHFRatingComponentProps>;
 
-export default function RHFInput({ name, wrapperClassName, ...other }: Props) {
+export default function RHFRatingComponent({ name, wrapperClassName, ...other }: Props) {
 	const { control } = useFormContext();
 
 	return (
@@ -29,7 +27,12 @@ export default function RHFInput({ name, wrapperClassName, ...other }: Props) {
 				<FormItem className={clsx(wrapperClassName)}>
 					{other.label && <FormLabel>{other.label}</FormLabel>}
 					<FormControl>
-						<Input {...field} {...other} />
+						<RatingComponent
+							{...field}
+							onChange={(value) => field.onChange(value)}
+							{...other}
+							value={field.value as unknown as number}
+						/>
 					</FormControl>
 					{other.description && <FormDescription>{other.description}</FormDescription>}
 					<FormMessage />
