@@ -5,8 +5,6 @@ import ReviewListItem from './ReviewListItem';
 const getReviews = async (restaurantId: string) => {
 	const reviews = await fetchApi<Review[]>(`Reviews/Restaurant/${restaurantId}`);
 
-	console.log(reviews);
-
 	return reviews?.data;
 };
 
