@@ -4,7 +4,6 @@ import CreateNewReviewCard from './CreateNewReviewCard';
 import ReviewListItem from './ReviewListItem';
 
 const getReviews = async (restaurantId: string) => {
-	console.log('restaurantId', restaurantId);
 	const reviews = await fetchApi<Review[]>(`Reviews/Restaurant/${restaurantId}`);
 	const personal = await fetchApi<Review>(`Reviews/Personal/${restaurantId}`).catch(() => null);
 

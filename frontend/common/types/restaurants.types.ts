@@ -35,9 +35,27 @@ export type OpeningHours = {
     sunday: HourSpan | null;
 };
 
-export type Timespan = `${number}:${number}:${number}`;
+export type Timespan = `${number}:${number}:${number}` | `${number}:${number}`;
 
 export type HourSpan = {
     opensAt: Timespan;
     closesAt: Timespan;
 }
+
+
+export type CreateRestaurantDto = {
+    name: string;
+    slug: string;
+    description: string;
+    foodType: string;
+    address: string;
+    state: string;
+    city: string;
+    zipCode: string;
+    phoneNumber: string;
+    website: string;
+    imageUrl: string;
+    openingHours: OpeningHours;
+    latitude: number;
+    longitude: number;
+};
