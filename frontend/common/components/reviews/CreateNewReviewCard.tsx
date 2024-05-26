@@ -5,9 +5,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 import { useState } from 'react';
 import NewReviewForm from './NewReviewForm';
 import clsx from 'clsx';
+import type { Review } from '@/common/types/reviews.types';
 
-export default function CreateNewReviewCard({ restaurantId }: { restaurantId: string }) {
+export default function CreateNewReviewCard({
+	restaurantId,
+	personal,
+}: { restaurantId: string; personal?: Review | null }) {
 	const [open, setOpen] = useState(true);
+
+	if (personal) return null;
 
 	return (
 		<>
