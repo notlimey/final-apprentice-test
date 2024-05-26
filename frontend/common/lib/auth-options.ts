@@ -21,6 +21,7 @@ export const authOptions: NextAuthOptions = {
                 token.id = user.id;
                 token.access_token = user.access_token;
                 token.expires_at = user.expires_at;
+                token.roles = user.roles;
             }
 
             return token;
@@ -55,6 +56,7 @@ export const authOptions: NextAuthOptions = {
                             email: data.user.email,
                             name: data.user.userName,
                             image: data.user.avatarUrl,
+                            roles: data.roles,
                         };
 
                         return res;

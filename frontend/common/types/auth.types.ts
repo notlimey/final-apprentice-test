@@ -10,6 +10,7 @@ export type BaseUser = {
 export type AuthResponse = {
     authToken: string;
     user: BaseUser;
+    roles: string[];
 };
 
 export type LoginDto = {

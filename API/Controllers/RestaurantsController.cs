@@ -50,6 +50,7 @@ public class RestaurantsController
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<RestaurantDto> Create([FromBody] CreateRestaurantDto dto)
     {
         var restaurant = new Restaurant()

@@ -34,17 +34,19 @@ public class AuthController
         if(user is null)
             throw new Exception("Invalid login attempt");
         
-        if (await _userManager.CheckPasswordAsync(user, model.Password))
-        {
-            var token = GenerateJwtToken(user);
-            return new LoginResultDto()
-            {
-                User = user.ToUserDto(),
-                AuthToken = token
-            };
-        }
+        if(!await _userManager.CheckPasswordAsync(user, model.Password))
+            throw new Exception("Invalid login attempt");
         
-        throw new Exception("Invalid login attempt");
+        var roles = await _userManager.GetRolesAsync(user);
+        
+            
+        var token = GenerateJwtToken(user, roles.ToList());
+        return new LoginResultDto()
+        {
+            User = user.ToUserDto(),
+            AuthToken = token,
+            Roles = roles.ToList()
+        };
     }
     
     [HttpPost("register")]
@@ -71,21 +73,29 @@ public class AuthController
     }
     
     
-    private string GenerateJwtToken(ApplicationUser user)
+    private string GenerateJwtToken(ApplicationUser user, List<string> roles = null)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
         var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
 
+        var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.UserName)
+        };
+
+        // Add each role as a new claim
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
+        
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.UserName)
-            }),
+            Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(Convert.ToDouble(jwtSettings["ExpireMinutes"])),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Issuer = jwtSettings["Issuer"],

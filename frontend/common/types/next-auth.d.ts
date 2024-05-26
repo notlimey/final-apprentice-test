@@ -10,6 +10,7 @@ declare module "next-auth/jwt" {
         refresh_token?: string;
         expires_at: number;
         error?: "RefreshAccessTokenError";
+        roles: string[];
     }
 }
 
@@ -19,6 +20,7 @@ declare module "next-auth" {
             id: UserId;
             access_token?: string;
             expires_at: number;
+            roles: string[];
         };
         error?: "RefreshAccessTokenError";
     }
@@ -29,5 +31,6 @@ declare module "next-auth" {
         id: UserId;
         access_token?: string;
         expires_at: number;
+        roles: string[];
     }
 }
