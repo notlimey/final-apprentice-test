@@ -18,7 +18,7 @@ export default async function ReviewList({ restaurantId }: { restaurantId: strin
 	return (
 		<>
 			{reviews.map((review) => (
-				<ReviewListItem {...review} key={review.id} />
+				<ReviewListItem review={review} key={review.id} />
 			))}
 		</>
 	);

@@ -1,3 +1,4 @@
+"use server";
 import type { AxiosRequestConfig } from "axios";
 import { getCurrentUser } from "./session";
 import axios from "axios";

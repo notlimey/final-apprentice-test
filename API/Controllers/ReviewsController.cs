@@ -15,7 +15,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize(AuthenticationSchemes = $"ApiToken, {JwtBearerDefaults.AuthenticationScheme}")]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class ReviewsController
 {
     private readonly IReviewService _reviewService;
@@ -111,7 +111,7 @@ public class ReviewsController
         return success;
     }
     
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<bool> Delete(Guid id)
     {
         
