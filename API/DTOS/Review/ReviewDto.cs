@@ -23,6 +23,8 @@ public class ReviewDto
     
     public string Comment { get; set; } = String.Empty;
     
+    public List<string> DishNames { get; set; } = new();
+    
     // relations
     
     // public RestaurantDto? Restaurant { get; set; }

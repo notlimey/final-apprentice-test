@@ -25,6 +25,8 @@ public class Review
     public int OverallRating { get; set; }
     
     public string Comment { get; set; } = String.Empty;
+
+    public List<string> DishNames { get; set; } = new List<string>();
     
     public DateTimeOffset CreatedAt { get; set; }
     
