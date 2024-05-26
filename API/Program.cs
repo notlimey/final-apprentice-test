@@ -1,3 +1,4 @@
+using API;
 using API.Data;
 using API.Extensions.Authentication;
 using API.Extensions.Swagger;
@@ -24,10 +25,18 @@ builder.Services.AddSwaggerSecurity(builder.Configuration);
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<AuthenticationSeed>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 
 var app = builder.Build();
+
+// Resolve the AuthenticationSeed service
+using var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<AuthenticationSeed>();
+await seeder.SeedRoles();
+
+// existing code...
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
