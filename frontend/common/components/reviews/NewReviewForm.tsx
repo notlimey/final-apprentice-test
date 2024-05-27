@@ -114,8 +114,8 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 										<Calendar
 											mode='single'
 											selected={field.value}
-											onSelect={(s: Date) => {
-												form.setValue('dateVisited', s);
+											onSelect={(s) => {
+												if (s) form.setValue('dateVisited', s);
 											}}
 											initialFocus
 										/>
