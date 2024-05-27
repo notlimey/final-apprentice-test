@@ -47,6 +47,13 @@ public static partial class AuthenticationServicesExtension
                 options.ClientId = configuration["Authentication:Google:ClientId"];
                 options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
                 // options.CallbackPath = "/Auth/externallogincallback";
+            })
+            .AddDiscord(options =>
+            {
+                options.ClientId = configuration["Authentication:Discord:ClientId"];
+                options.ClientSecret = configuration["Authentication:Discord:ClientSecret"];
+                options.Scope.Add("identify");
+                options.Scope.Add("email");
             });
     }
 }

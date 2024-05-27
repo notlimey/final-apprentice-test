@@ -8,4 +8,6 @@ namespace API.Mappings.Identity;
 public static partial class UserMapper
 {
     public static partial UserDto ToUserDto(this ApplicationUser user);
+    
+    public static partial ExtendedUserDto ToExtendedUserDto(this ApplicationUser user);
 }

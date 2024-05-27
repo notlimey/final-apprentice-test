@@ -88,6 +88,7 @@ public class AuthController : ControllerBase
     [HttpGet("externallogincallback")]
     public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
     {
+        
         returnUrl = returnUrl ?? Url.Content("~/");
         if (remoteError != null)
         {
@@ -156,6 +157,30 @@ public class AuthController : ControllerBase
         {
             User = user.ToUserDto(),
             Roles = roles.ToList()
+        };
+    }
+    
+    
+    [HttpGet("Personal/Extended")]
+    public async Task<PersonalUserResultExtended?> GetPersonalExtended()
+    {
+        var userId = _accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+            throw new Exception("User id not found");
+        
+        var user = await _userManager.FindByIdAsync(userId);
+        if(user is null)
+            throw new Exception("User not found");
+        
+        var roles = await _userManager.GetRolesAsync(user);
+        
+        var providers = await _userManager.GetLoginsAsync(user);
+        
+        return new PersonalUserResultExtended()
+        {
+            User = user.ToExtendedUserDto(),
+            Roles = roles.ToList(),
+            Providers = providers.Select(x => x.LoginProvider).ToList(),
         };
     }
     

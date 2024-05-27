@@ -30,9 +30,9 @@ const LoginView = () => {
 		});
 	};
 
-	const handleSignInWithGoogle = () => {
+	const handleSignInWithExternal = (provider: 'Google' | 'Discord') => {
 		const returnUrl = `${window.location.origin}/auth/callback`;
-		window.location.href = `${BASE_URL}Auth/externallogin?provider=Google&returnUrl=${encodeURIComponent(
+		window.location.href = `${BASE_URL}Auth/externallogin?provider=${provider}&returnUrl=${encodeURIComponent(
 			returnUrl,
 		)}`;
 	};
@@ -70,7 +70,7 @@ const LoginView = () => {
 							<Button
 								variant='outline'
 								title='Google signin'
-								onClick={handleSignInWithGoogle}
+								onClick={() => handleSignInWithExternal('Google')}
 								className='inline-flex gap-1'
 							>
 								{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
@@ -96,7 +96,12 @@ const LoginView = () => {
 								</svg>
 								Facebook
 							</Button>
-							<Button variant='outline' title='Discord signin' disabled className='inline-flex gap-1'>
+							<Button
+								variant='outline'
+								title='Discord signin'
+								onClick={() => handleSignInWithExternal('Discord')}
+								className='inline-flex gap-1'
+							>
 								{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
 								<svg
 									xmlns='http://www.w3.org/2000/svg'
