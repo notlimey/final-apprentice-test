@@ -8,9 +8,10 @@ export type RatingProps = {
 	onChange?: (value: number) => void;
 	size?: number;
 	hoverDisabled?: boolean;
+	numberOfRatings?: number;
 };
 
-const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabled }) => {
+const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabled, numberOfRatings }) => {
 	const [hover, setHover] = useState<number | null>(null);
 
 	return (
@@ -25,12 +26,15 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabl
 						// biome-ignore lint/style/noUnusedTemplateLiteral: <explanation>
 						`cursor-pointer`,
 						`w-[${size}px]`,
-						(hover || value) >= star
-							? 'fill-yellow-400 stroke-yellow-400'
-							: 'fill-gray-100 stroke-gray-300',
+						(hover || value) >= star ? 'fill-primary stroke-primary' : 'fill-card stroke-card',
 					)}
 				/>
 			))}
+			{numberOfRatings && (
+				<span className='text-[12px] text-[#444]'>
+					{numberOfRatings} {numberOfRatings === 1 ? 'vurdering' : 'vurderinger'}
+				</span>
+			)}
 		</div>
 	);
 };
