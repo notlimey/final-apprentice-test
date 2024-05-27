@@ -29,6 +29,13 @@ export const authOptions: NextAuthOptions = {
         session: async ({ session, token }) => {
             session.user = token;
             return session;
+        },
+        signIn: async ({ account, user, credentials }) => {
+            if (account?.provider === "google") {
+                console.log("Google sign in", user, credentials)
+            }
+
+            return true;
         }
     },
 
@@ -71,6 +78,6 @@ export const authOptions: NextAuthOptions = {
                     return null; // Ensure proper error handling
                 }
             }
-        })
+        }),
     ],
 }

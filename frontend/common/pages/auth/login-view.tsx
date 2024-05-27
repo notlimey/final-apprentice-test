@@ -2,8 +2,9 @@
 
 import RHFInput from '@/common/components/inputs/RHFInput';
 import { Button } from '@/common/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/common/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/common/components/ui/card';
 import { Form } from '@/common/components/ui/form';
+import { BASE_URL } from '@/common/lib/constants/api';
 import type { LoginDto } from '@/common/types/auth.types';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
@@ -27,6 +28,13 @@ const LoginView = () => {
 			redirect: true,
 			callbackUrl: redirectUrl,
 		});
+	};
+
+	const handleSignInWithGoogle = () => {
+		const returnUrl = `${window.location.origin}/auth/google-callback`;
+		window.location.href = `${BASE_URL}Auth/externallogin?provider=Google&returnUrl=${encodeURIComponent(
+			returnUrl,
+		)}`;
 	};
 
 	return (
@@ -55,6 +63,16 @@ const LoginView = () => {
 						</form>
 					</Form>
 				</CardContent>
+				<CardFooter>
+					<div className='gap-y-1 flex flex-col pt-2 border-t w-full'>
+						<p>Or sign in with</p>
+						<div className='grid grid-cols-1 md:grid-cols-3 gap-1 w-full'>
+							<Button onClick={handleSignInWithGoogle}>Google</Button>
+							<Button disabled>Facebook</Button>
+							<Button disabled>Discord</Button>
+						</div>
+					</div>
+				</CardFooter>
 			</Card>
 		</div>
 	);
