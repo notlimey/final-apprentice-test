@@ -18,12 +18,14 @@ public class AuthController : ControllerBase
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IConfiguration _configuration;
+    private readonly IHttpContextAccessor _accessor;  
     
-    public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+    public AuthController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, IHttpContextAccessor accessor)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _configuration = configuration;
+        _accessor = accessor;
     }
     
     [HttpPost("login")]
@@ -77,7 +79,8 @@ public class AuthController : ControllerBase
     [HttpGet("externallogin")]
     public IActionResult ExternalLogin(string provider, string returnUrl = null)
     {
-        var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Auth", new { returnUrl });
+        Console.WriteLine(returnUrl);
+        var redirectUrl = Url.Action("externallogincallback", "Auth", new { returnUrl });
         var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
         return Challenge(properties, provider);
     }
@@ -136,10 +139,24 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet("Personal")]
-    public async Task<UserDto> GetPersonal()
+    public async Task<PersonalUserResult> GetPersonal()
     {
-        var user = await _userManager.GetUserAsync(User);
-        return user.ToUserDto();
+        
+        var userId = _accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+            throw new Exception("User id not found");
+        
+        var user = await _userManager.FindByIdAsync(userId);
+        if(user is null)
+            throw new Exception("User not found");
+        
+        var roles = await _userManager.GetRolesAsync(user);
+        
+        return new PersonalUserResult()
+        {
+            User = user.ToUserDto(),
+            Roles = roles.ToList()
+        };
     }
     
     private string GenerateJwtToken(ApplicationUser user, List<string> roles = null)

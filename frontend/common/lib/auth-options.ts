@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
         jwt: async ({ token, user }) => {
             if (user) {
                 token.id = user.id;
+                token.email = user.email;
                 token.access_token = user.access_token;
                 token.expires_at = user.expires_at;
                 token.roles = user.roles;
@@ -27,26 +28,60 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
         session: async ({ session, token }) => {
-            session.user = token;
+            session.user = {
+                id: token.id,
+                email: token.email,
+                roles: token.roles,
+                access_token: token.access_token,
+                expires_at: token.expires_at,
+                name: token.name
+            };
             return session;
         },
-        signIn: async ({ account, user, credentials }) => {
-            if (account?.provider === "google") {
-                console.log("Google sign in", user, credentials)
-            }
-
-            return true;
-        }
+        // redirect: async ({ url, baseUrl }) => {
+        //     return url.startsWith(baseUrl) ? url : baseUrl;
+        // }
     },
 
     providers: [
         CredentialsProvider({
             credentials: {
                 username: { label: "Username/Email", type: "text", placeholder: "jsmith" },
-                password: { label: "Password", type: "password" }
+                password: { label: "Password", type: "password" },
+                authToken: { label: "Token", type: "text" },
+                userId: { label: "User ID", type: "text" },
             },
             authorize: async (credentials, req) => {
-                const { username, password } = credentials as LoginDto;
+                const { username, password, authToken } = credentials as LoginDto & { authToken?: string, userId?: string };
+
+                if (authToken) {
+                    try {
+                        const { data, status } = await axios.get<AuthResponse>(`${BASE_URL}Auth/Personal`, {
+                            headers: {
+                                Authorization: `Bearer ${authToken}`,
+                            },
+                        });
+
+                        if (status === 200) {
+                            const res = {
+                                id: data.user.id,
+                                access_token: authToken,
+                                expires_at: Date.now() + 1000 * 60 * 60 * 24 * 30, // 30 days
+                                email: data.user.email,
+                                name: data.user.userName, // Ensure name is correctly formatted
+                                image: data.user.avatarUrl,
+                                roles: data.roles,
+                            };
+
+                            return res;
+                        }
+                    } catch (error) {
+                        if (process.env.NODE_ENV === 'development') {
+                            console.error('Error fetching personal data', error);
+                        }
+                    }
+                    return null;
+                }
 
                 try {
                     const { data, status } = await axios.post<AuthResponse>(`${BASE_URL}Auth/login`, {
@@ -55,13 +90,12 @@ export const authOptions: NextAuthOptions = {
                     });
 
                     if (status === 200) {
-
                         const res = {
                             id: data.user.id,
                             access_token: data.authToken,
                             expires_at: Date.now() + 1000 * 60 * 60 * 24 * 30, // 30 days
                             email: data.user.email,
-                            name: data.user.userName,
+                            name: data.user.userName, // Ensure name is correctly formatted
                             image: data.user.avatarUrl,
                             roles: data.roles,
                         };
@@ -75,7 +109,7 @@ export const authOptions: NextAuthOptions = {
                     } else {
                         console.error('Error logging in');
                     }
-                    return null; // Ensure proper error handling
+                    return null;
                 }
             }
         }),
