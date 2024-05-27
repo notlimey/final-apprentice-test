@@ -86,7 +86,6 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
     {
         returnUrl = returnUrl ?? Url.Content("~/");
-
         if (remoteError != null)
         {
             return BadRequest(new { Error = remoteError });
@@ -99,15 +98,14 @@ public class AuthController : ControllerBase
         }
 
         var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
-
         if (signInResult.Succeeded)
         {
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             var roles = await _userManager.GetRolesAsync(user);
             var token = GenerateJwtToken(user, roles.ToList());
 
-            // Redirect to the NextAuth callback URL, including the JWT token if necessary
-            return Redirect(returnUrl); // Update this to more specific as needed
+            // Send user and token information back to Next.js callback
+            return Redirect($"{returnUrl}?token={Uri.EscapeDataString(token)}&id={user.Id}");
         }
         else
         {
@@ -128,8 +126,8 @@ public class AuthController : ControllerBase
                     var roles = await _userManager.GetRolesAsync(user);
                     var token = GenerateJwtToken(user, roles.ToList());
 
-                    // Redirect to the NextAuth callback URL, including the JWT token if necessary
-                    return Redirect(returnUrl); // Update this to more specific as needed
+                    // Send user and token information back to Next.js callback
+                    return Redirect($"{returnUrl}?token={Uri.EscapeDataString(token)}&id={user.Id}");
                 }
             }
 
@@ -137,6 +135,12 @@ public class AuthController : ControllerBase
         }
     }
 
+    [HttpGet("Personal")]
+    public async Task<UserDto> GetPersonal()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        return user.ToUserDto();
+    }
     
     private string GenerateJwtToken(ApplicationUser user, List<string> roles = null)
     {
