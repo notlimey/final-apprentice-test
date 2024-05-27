@@ -7,7 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const getRestaurants = async () => {
-	const restaurants = await axios.get<Restaurant[]>(`${BASE_URL}Restaurants`);
+	const restaurants = await axios.get<Restaurant[]>(`${BASE_URL}Restaurants`).catch(() => ({
+		data: [],
+	}));
 
 	return restaurants.data;
 };

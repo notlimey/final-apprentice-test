@@ -114,11 +114,19 @@ public class AuthController : ControllerBase
         else
         {
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            
             var user = new ApplicationUser
             {
-                UserName = email,
-                Email = email
+                UserName = info.Principal.FindFirstValue(ClaimTypes.Name) ?? email,
+                Email = email,
+                AvatarUrl = $"https://api.dicebear.com/8.x/adventurer/svg?seed={Guid.NewGuid().ToString()}",
+                IsAnonymous = false,
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
             };
+            
+            user = await RandomizeUsernameHash(user);
 
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)
@@ -218,5 +226,21 @@ public class AuthController : ControllerBase
         return tokenHandler.WriteToken(token);
     }
     
-    
+    private async Task<ApplicationUser> RandomizeUsernameHash(ApplicationUser user, int depth = 0)
+    {
+        if (depth > 5)
+        {
+            throw new Exception("Username generation failed");
+        }
+        var userWithUsername = await _userManager.FindByNameAsync(user.UserName);
+        if (userWithUsername != null)
+        {
+            var length = depth > 3 ? 10 : 5;
+            user.UserName = $"{user.UserName}{Guid.NewGuid().ToString().Substring(0, length)}";
+            
+            return await RandomizeUsernameHash(user);
+        }
+        
+        return user;
+    }
 }

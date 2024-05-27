@@ -1,14 +1,16 @@
 import { fetchApi } from '@/common/lib/api';
-import { getCurrentSession, getCurrentUser } from '@/common/lib/session';
+import { notFound } from 'next/navigation';
 
 const getExtendedUser = async () => {
-	const data = await fetchApi('Auth/Personal/Extended');
+	const data = await fetchApi('Auth/Personal/Extended').catch(() => null);
 
-	return data.data;
+	return data?.data;
 };
 
 export default async function Profile() {
 	const session = await getExtendedUser();
+
+	if (!session) return notFound();
 
 	return (
 		<>
