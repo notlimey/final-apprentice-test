@@ -77,6 +77,7 @@ public class AuthController : ControllerBase
     
 
     [HttpGet("externallogin")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public IActionResult ExternalLogin(string provider, string returnUrl = null)
     {
         Console.WriteLine(returnUrl);
@@ -86,6 +87,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet("externallogincallback")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
     {
         

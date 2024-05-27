@@ -22,7 +22,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang='en'>
-			<body className={`${inter.className} bg-gray-100`}>
+			<body className={inter.className}>
 				<GlobalClientProviders>
 					<nav className='h-[60px] flex items-center w-full justify-between'>
 						<div className='max-w-[1240px] mx-auto flex justify-between w-full px-5'>

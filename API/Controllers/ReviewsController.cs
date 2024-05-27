@@ -32,7 +32,7 @@ public class ReviewsController
     }
 
     [HttpGet("Restaurant/{id}")]
-    [AllowAnonymous]
+    [Authorize(AuthenticationSchemes = "ApiToken")]
     public async Task<List<ReviewDto>> GetByRestaurant(Guid id)
     {
         var result = await _reviewService.GetReviewsByRestaurantAsync(id, includeUser: true);
@@ -47,7 +47,7 @@ public class ReviewsController
     }
     
     [HttpGet("Personal/{restaurantId}")]
-    public async Task<ReviewDto> GetPersonal(string restaurantId)
+    public async Task<ReviewDto?> GetPersonal(string restaurantId)
     {
         var id = _accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (id == null) throw new Exception("User id not found");
@@ -59,10 +59,8 @@ public class ReviewsController
         Guid.TryParse(restaurantId, out var guid);
         
         var result = await _reviewService.GetPersonalReviewAsync(user.Id, guid, includeRestaurant: true);
-
-        if (result != null) return result.ToDto();
-
-        throw new HttpRequestException("Review not found");
+        
+        return result?.ToDto();
     }
     
     [HttpPost("{restaurantId}")]

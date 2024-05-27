@@ -1,6 +1,7 @@
 import Rating from '@/common/components/inputs/RatingComponent';
 import { BASE_URL } from '@/common/lib/constants/api';
 import { getCurrentSession, getCurrentUser } from '@/common/lib/session';
+import HomeView from '@/common/pages/home/home-view';
 import type { Restaurant } from '@/common/types/restaurants.types';
 import axios from 'axios';
 import Image from 'next/image';
@@ -19,6 +20,7 @@ export default async function Home() {
 
 	return (
 		<>
+			<HomeView />
 			<div className='max-w-[1240px] px-5 mx-auto py-12'>
 				<h1 className='font-bold text-4xl md:text-5xl'>Innlandet mat</h1>
 				<p className='mt-3 text-lg'>En oversikt over restauranter og spisesteder i Innlandet fylke.</p>
