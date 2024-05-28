@@ -2,8 +2,13 @@
 
 ## Norwegian
 
+### Planlegging
+
 - [Oppgaven](/docs/no/assignment.md)
 - [Min tolkning av oppgaven](/docs/no/interpretation.md)
+- [Techstack](/docs/no/techstack.md)
+- [Arkitektur](/docs/no/architecture.md)
+- [Database struktur](/docs/no/database.md)
 
 ## English
 
