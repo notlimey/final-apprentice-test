@@ -3,7 +3,7 @@ import type { Review } from '@/common/types/reviews.types';
 import ReviewListItem from './ReviewListItem';
 
 const getReviews = async (restaurantId: string) => {
-	const reviews = await fetchApi<Review[]>(`Reviews/Restaurant/${restaurantId}`);
+	const reviews = await fetchApi<Review[]>(`Reviews/Restaurant/${restaurantId}`).catch(() => ({ data: [] }));
 	const personal = await fetchApi<Review>(`Reviews/Personal/${restaurantId}`).catch(() => null);
 
 	return [reviews?.data, personal?.data as null | Review] as const;
