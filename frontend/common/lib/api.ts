@@ -13,7 +13,7 @@ export const fetchApi = async <T,>(path: string, options: AxiosRequestConfig<any
             ...options,
             headers: {
                 ...options.headers,
-                ...(process.env.NEXT_PUBLIC_API_KEY && { ApiKey: process.env.NEXT_PUBLIC_API_KEY })
+                ...(process.env.API_KEY && { ApiKey: process.env.API_KEY })
             }
         });
     }
