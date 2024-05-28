@@ -1,5 +1,5 @@
-import LoginView from "@/common/pages/auth/login-view";
+import LoginView from '@/common/lib/pages/auth/login-view';
 
 export default function Signin() {
-    return <LoginView />;
+	return <LoginView />;
 }

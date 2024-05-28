@@ -1,6 +1,6 @@
 import ReviewList from '@/common/components/reviews/ReviewList';
 import { fetchApi } from '@/common/lib/api';
-import RestaurantView from '@/common/pages/restaurant/restaruant-view';
+import RestaurantView from '@/common/lib/pages/restaurant/restaruant-view';
 import type { Restaurant } from '@/common/types/restaurants.types';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';

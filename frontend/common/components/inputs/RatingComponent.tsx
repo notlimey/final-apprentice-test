@@ -15,7 +15,7 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabl
 	const [hover, setHover] = useState<number | null>(null);
 
 	return (
-		<div className='flex items-center space-x-1'>
+		<div className='flex items-center gap-x-2'>
 			{Array.from({ length: 5 }, (_, index) => index + 1).map((star) => (
 				<Star
 					key={star}
@@ -30,11 +30,11 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabl
 					)}
 				/>
 			))}
-			{numberOfRatings && (
+			{numberOfRatings && numberOfRatings >= 1 ? (
 				<span className='text-[12px] text-[#444]'>
 					{numberOfRatings} {numberOfRatings === 1 ? 'vurdering' : 'vurderinger'}
 				</span>
-			)}
+			) : null}
 		</div>
 	);
 };

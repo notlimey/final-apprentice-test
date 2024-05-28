@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Work_Sans } from 'next/font/google';
 import './globals.css';
 import GlobalClientProviders from '@/common/providers/global-client-providers';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { Home } from 'lucide-react';
 
-const inter = Inter({ subsets: ['latin'] });
+const workSans = Work_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -22,7 +22,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang='en'>
-			<body className={inter.className}>
+			<body className={workSans.className}>
 				<GlobalClientProviders>
 					<nav className='h-[60px] flex items-center w-full justify-between'>
 						<div className='max-w-[1240px] mx-auto flex justify-between w-full px-5'>

@@ -48,6 +48,8 @@ public class RestaurantDto
     public double AverageValueForMoneyRating { get; set; }
     
     public double AverageOverallRating { get; set; }
+    
+    public int NumberOfReviews { get; set; }
 
     public IEnumerable<ReviewDto> Reviews { get; set; } = [];
 }

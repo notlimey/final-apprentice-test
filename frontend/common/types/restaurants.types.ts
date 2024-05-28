@@ -22,6 +22,7 @@ export type Restaurant = {
     averageAmbianceRating: number;
     averageValueForMoneyRating: number;
     averageOverallRating: number;
+    numberOfReviews: number;
 };
 
 
