@@ -8,6 +8,10 @@ import { BASE_URL } from "./constants/api";
 export const fetchApi = async <T,>(path: string, options: AxiosRequestConfig<any> = {}) => {
     const user = await getCurrentUser();
 
+    if (!user) {
+        return await axios<T>(`${BASE_URL}${path}`, options);
+    }
+
     return await axios<T>(`${BASE_URL}${path}`, {
         ...options,
         headers: {
