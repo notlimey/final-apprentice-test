@@ -101,13 +101,13 @@ export default function RestaurantView(restaurant: Restaurant) {
 					</div>
 					<div className='grid grid-cols-2 gap-x-4 gap-y-1'>
 						<p>Matkvalitet</p>
-						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<Rating value={restaurant.averageFoodQualityRating} size={24} hoverDisabled />
 						<p>Servicekvalitet</p>
-						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<Rating value={restaurant.averageServiceQualityRating} size={24} hoverDisabled />
 						<p>Stemning</p>
-						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<Rating value={restaurant.averageAmbianceRating} size={24} hoverDisabled />
 						<p>Valuta for pengene</p>
-						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<Rating value={restaurant.averageValueForMoneyRating} size={24} hoverDisabled />
 					</div>
 				</div>
 			</div>
