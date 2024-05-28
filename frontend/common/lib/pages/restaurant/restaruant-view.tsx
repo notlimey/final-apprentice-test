@@ -76,7 +76,7 @@ export default function RestaurantView(restaurant: Restaurant) {
 						<Phone className='size-6' />
 						{restaurant.phoneNumber ? (
 							<Link className='underline' href={`tlf:${restaurant.phoneNumber}`}>
-								{websiteReadable}
+								{restaurant.phoneNumber}
 							</Link>
 						) : (
 							<p>Ingen telefonnummer tilgjengelig</p>

@@ -12,6 +12,13 @@ using Microsoft.AspNetCore.Authentication.Google;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+    
+Console.WriteLine((builder.Configuration.GetConnectionString("DefaultConnection")));
+
+foreach (var variable in Environment.GetEnvironmentVariables())
+{
+    Console.WriteLine(variable);
+}
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
