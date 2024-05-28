@@ -1,5 +1,8 @@
 # Oppgaven
 
+[<- Tilbake](/)
+<br />
+
 - [Oppgaven](#oppgaven)
   - [1.1 Den lokale matguiden](#11-den-lokale-matguiden)
     - [1.1.1. Registrering/innlogging](#111-registreringinnlogging)

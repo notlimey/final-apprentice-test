@@ -1,4 +1,5 @@
 # Min tolkning av oppgaven
+[<- Tilbake](/)
 
 Jeg skal lage en teknisk løsning på nett som viser en oversikt over restauranter i innlandsregionen og anmeldelser av dem. Brukere skal kunne anmelde restauranter selv.
 
