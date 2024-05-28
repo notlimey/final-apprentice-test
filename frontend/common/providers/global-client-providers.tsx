@@ -11,7 +11,12 @@ export default function GlobalClientProviders({
 	return (
 		<SessionProvider>
 			{children}
-			<ProgressBar height='4px' color={'#FFD700'} options={{ showSpinner: false }} shallowRouting />
+			<ProgressBar
+				height='4px'
+				color={'hsl(130, 100%, 75%, 1)'}
+				options={{ showSpinner: false }}
+				shallowRouting
+			/>
 			<Toaster />
 		</SessionProvider>
 	);
