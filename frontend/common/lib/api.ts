@@ -9,7 +9,13 @@ export const fetchApi = async <T,>(path: string, options: AxiosRequestConfig<any
     const user = await getCurrentUser();
 
     if (!user) {
-        return await axios<T>(`${BASE_URL}${path}`, options);
+        return await axios<T>(`${BASE_URL}${path}`, {
+            ...options,
+            headers: {
+                ...options.headers,
+                ...(process.env.NEXT_PUBLIC_API_KEY && { ApiKey: process.env.NEXT_PUBLIC_API_KEY })
+            }
+        });
     }
 
     return await axios<T>(`${BASE_URL}${path}`, {
