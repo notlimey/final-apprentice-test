@@ -1,9 +1,10 @@
 import Rating from '@/common/components/inputs/RatingComponent';
 import RestaurantMap from '@/common/components/maps/RestaurantMap';
+import CreateNewReviewCard from '@/common/components/reviews/CreateNewReviewCard';
 import { Button } from '@/common/components/ui/button';
 import HeroSection from '@/common/sections/home/HeroSection';
 import type { Restaurant } from '@/common/types/restaurants.types';
-import { Clock, Home, Mail, MapPin, Phone, PiggyBank, Plus, Utensils } from 'lucide-react';
+import { Clock, Home, MapPin, Phone, PiggyBank, Plus, Utensils } from 'lucide-react';
 import Link from 'next/link';
 
 const days = {
@@ -36,7 +37,7 @@ export default function RestaurantView(restaurant: Restaurant) {
 					alt: restaurant.name,
 				}}
 			/>
-			<div className='py-[36px] px-[24px] grid grid-cols-1 md:grid-cols-4 bg-secondary'>
+			<div className='py-[36px] px-[24px] grid grid-cols-1 gap-y-3 md:grid-cols-4 bg-secondary'>
 				<div className='flex justify-center items-center gap-1.5'>
 					<MapPin className='size-6' />
 					<p>200 meter unna</p>
@@ -86,13 +87,13 @@ export default function RestaurantView(restaurant: Restaurant) {
 						<p>{restaurant.address}</p>
 					</div>
 				</div>
-				<div className='h-full self-stretch'>
+				<div className='h-64 md:h-full self-stretch'>
 					<RestaurantMap {...restaurant} />
 				</div>
 			</div>
 			<div className='pt-12'>
 				<h2 className='text-[36px] leading-[44px]'>Anmeldelser</h2>
-				<div className='flex flex-wrap md:flex-nowrap gap-x-[60px] mt-5'>
+				<div className='flex flex-col md:flex-row gap-y-5 md:flex-nowrap gap-x-[60px] mt-5'>
 					<div className='flex flex-col gap-y-1'>
 						<h3 className='text-[24px]'>Totalvurdering: {restaurant.averageOverallRating}</h3>
 						<Rating value={restaurant.averageOverallRating} />
@@ -112,10 +113,15 @@ export default function RestaurantView(restaurant: Restaurant) {
 					</div>
 				</div>
 				<div className='w-full'>
-					<Button className='mt-5'>
-						<Plus className='size-4 mr-2' />
-						Legg til anmeldelse
-					</Button>
+					<CreateNewReviewCard
+						restaurantId={restaurant.id}
+						trigger={
+							<Button className='mt-5'>
+								<Plus className='size-4 mr-2' />
+								Legg til anmeldelse
+							</Button>
+						}
+					/>
 				</div>
 			</div>
 		</div>

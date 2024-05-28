@@ -1,6 +1,5 @@
 import { fetchApi } from '@/common/lib/api';
 import type { Review } from '@/common/types/reviews.types';
-import CreateNewReviewCard from './CreateNewReviewCard';
 import ReviewListItem from './ReviewListItem';
 
 const getReviews = async (restaurantId: string) => {
@@ -19,8 +18,7 @@ export default async function ReviewList({ restaurantId }: { restaurantId: strin
 
 	return (
 		<>
-			<div className='py-12'>
-				<CreateNewReviewCard restaurantId={restaurantId} personal={personal} />
+			<div className='max-w-[1240px] px-5 mx-auto  py-12 flex flex-col gap-y-5'>
 				{personal && <ReviewListItem review={personal} />}
 				{reviews
 					.filter((x) => x.id !== personal?.id)

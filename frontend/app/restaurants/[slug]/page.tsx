@@ -23,11 +23,11 @@ export default async function RestaurantsPage(props: Props) {
 	if (!restaurant) return notFound();
 
 	return (
-		<div className='max-w-[1240px] px-5 mx-auto py-12'>
+		<>
 			<RestaurantView {...restaurant} />
 			<Suspense fallback={<div>Loading...</div>}>
 				<ReviewList restaurantId={restaurant.id} />
 			</Suspense>
-		</div>
+		</>
 	);
 }

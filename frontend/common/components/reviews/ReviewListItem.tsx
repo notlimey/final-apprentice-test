@@ -28,7 +28,7 @@ const ReviewListItem = ({ review, onDelete }: { review: ReviewType; onDelete?: (
 	};
 
 	return (
-		<div className='flex gap-[36px]'>
+		<div className='flex gap-[36px] flex-col items-center md:flex-row md:items-start'>
 			<div className='flex flex-col w-[150px] gap-y-[12px] justify-start items-center'>
 				<img
 					src={review.user?.avatarUrl ?? ''}

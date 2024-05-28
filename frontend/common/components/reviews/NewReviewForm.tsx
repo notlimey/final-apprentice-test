@@ -1,23 +1,22 @@
 'use client';
+import { createReview } from '@/common/lib/reviews';
 import type { CreateReviewDto } from '@/common/types/reviews.types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import clsx from 'clsx';
+import { format } from 'date-fns';
+import { CalendarIcon, Plus, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Card, CardTitle } from '../ui/card';
-import { Form, FormField, FormItem, FormMessage } from '../ui/form';
 import RHFInput from '../inputs/RHFInput';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Button } from '../ui/button';
-import { CalendarIcon, Plus, X } from 'lucide-react';
-import clsx from 'clsx';
-import { Calendar } from '../ui/calendar';
-import { format } from 'date-fns';
-import { Label } from '../ui/label';
-import RHFTextarea from '../inputs/RHFTextarea';
 import RHFRatingComponent from '../inputs/RHFRatingComponent';
-import { createReview } from '@/common/lib/reviews';
-import AddRestaurantDish from './AddRestaurantDish';
+import RHFTextarea from '../inputs/RHFTextarea';
+import { Button } from '../ui/button';
+import { Calendar } from '../ui/calendar';
+import { Form, FormField, FormItem, FormMessage } from '../ui/form';
+import { Label } from '../ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { useToast } from '../ui/use-toast';
+import AddRestaurantDish from './AddRestaurantDish';
 
 const Schema = z.object({
 	title: z.string().min(1, 'Minimum 1 tegn').max(50, 'Maks 50 tegn'),
@@ -36,7 +35,7 @@ const Schema = z.object({
 	dishNames: z.array(z.string()).min(1, 'Legg til minst én rett'),
 });
 
-export default function NewReviewForm({ restaurantId }: { restaurantId: string }) {
+export default function NewReviewForm({ restaurantId, onAdd }: { restaurantId: string; onAdd?: () => void }) {
 	const form = useForm<CreateReviewDto>({
 		resolver: zodResolver(Schema),
 		defaultValues: {
@@ -88,21 +87,21 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 					<RHFInput
 						name='title'
 						label='Tittel'
-						wrapperClassName='lg:col-span-3'
+						wrapperClassName='lg:col-span-2'
 						placeholder='en kort tittel..'
 					/>
 					<FormField
 						name='dateVisited'
 						control={form.control}
 						render={({ field }) => (
-							<FormItem className='gap-y-2 flex flex-col'>
+							<FormItem className='gap-y-2 flex flex-col md:col-span-2'>
 								<Label>Dato besøkt</Label>
 								<Popover>
 									<PopoverTrigger asChild>
 										<Button
 											variant={'outline'}
 											className={clsx(
-												'w-[280px] justify-start text-left font-normal',
+												'w-full justify-start text-left font-normal',
 												!field.value && 'text-muted-foreground',
 											)}
 										>
@@ -141,7 +140,7 @@ export default function NewReviewForm({ restaurantId }: { restaurantId: string }
 						name='dishNames'
 						control={form.control}
 						render={({ field }) => (
-							<FormItem className='col-span-3'>
+							<FormItem className='lg:col-span-3'>
 								<div className='flex flex-wrap gap-3'>
 									{field.value?.map((dish, index) => (
 										<div
