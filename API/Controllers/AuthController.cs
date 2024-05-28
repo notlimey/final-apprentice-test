@@ -129,6 +129,7 @@ public class AuthController : ControllerBase
             };
             
             user = await RandomizeUsernameHash(user);
+            user.FirstName = user.UserName;
 
             var result = await _userManager.CreateAsync(user);
             if (result.Succeeded)

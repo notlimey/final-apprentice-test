@@ -14,6 +14,7 @@ export type Review = {
     restaurant?: Restaurant;
     user?: BaseUser;
     dishNames: string[];
+    createdAt: string;
 };
 
 export type CreateReviewDto = {

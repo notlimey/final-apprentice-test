@@ -19,7 +19,7 @@ export default async function ReviewList({ restaurantId }: { restaurantId: strin
 
 	return (
 		<>
-			<div className='py-6'>
+			<div className='py-12'>
 				<CreateNewReviewCard restaurantId={restaurantId} personal={personal} />
 				{personal && <ReviewListItem review={personal} />}
 				{reviews

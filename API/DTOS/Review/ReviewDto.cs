@@ -30,4 +30,6 @@ public class ReviewDto
     // public RestaurantDto? Restaurant { get; set; }
     
     public UserDto? User { get; set; }
+    
+    public DateTimeOffset CreatedAt { get; set; }
 }

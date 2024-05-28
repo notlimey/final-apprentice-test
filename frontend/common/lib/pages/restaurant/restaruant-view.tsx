@@ -1,8 +1,9 @@
 import Rating from '@/common/components/inputs/RatingComponent';
 import RestaurantMap from '@/common/components/maps/RestaurantMap';
+import { Button } from '@/common/components/ui/button';
 import HeroSection from '@/common/sections/home/HeroSection';
 import type { Restaurant } from '@/common/types/restaurants.types';
-import { Clock, Home, Mail, MapPin, Phone, PiggyBank, Utensils } from 'lucide-react';
+import { Clock, Home, Mail, MapPin, Phone, PiggyBank, Plus, Utensils } from 'lucide-react';
 import Link from 'next/link';
 
 const days = {
@@ -109,6 +110,12 @@ export default function RestaurantView(restaurant: Restaurant) {
 						<p>Valuta for pengene</p>
 						<Rating value={restaurant.averageValueForMoneyRating} size={24} hoverDisabled />
 					</div>
+				</div>
+				<div className='w-full'>
+					<Button className='mt-5'>
+						<Plus className='size-4 mr-2' />
+						Legg til anmeldelse
+					</Button>
 				</div>
 			</div>
 		</div>

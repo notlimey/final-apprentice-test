@@ -11,7 +11,7 @@ export type RatingProps = {
 	numberOfRatings?: number;
 };
 
-const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabled, numberOfRatings }) => {
+const Rating: React.FC<RatingProps> = ({ value, onChange, size = 24, hoverDisabled, numberOfRatings }) => {
 	const [hover, setHover] = useState<number | null>(null);
 
 	return (
