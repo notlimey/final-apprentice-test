@@ -1,3 +1,4 @@
+import Rating from '@/common/components/inputs/RatingComponent';
 import RestaurantMap from '@/common/components/maps/RestaurantMap';
 import HeroSection from '@/common/sections/home/HeroSection';
 import type { Restaurant } from '@/common/types/restaurants.types';
@@ -86,6 +87,28 @@ export default function RestaurantView(restaurant: Restaurant) {
 				</div>
 				<div className='h-full self-stretch'>
 					<RestaurantMap {...restaurant} />
+				</div>
+			</div>
+			<div className='pt-12'>
+				<h2 className='text-[36px] leading-[44px]'>Anmeldelser</h2>
+				<div className='flex flex-wrap md:flex-nowrap gap-x-[60px] mt-5'>
+					<div className='flex flex-col gap-y-1'>
+						<h3 className='text-[24px]'>Totalvurdering: {restaurant.averageOverallRating}</h3>
+						<Rating value={restaurant.averageOverallRating} />
+						<p>
+							{restaurant.numberOfReviews} {restaurant.numberOfReviews > 1 ? 'anmeldelser' : 'anmeldelse'}
+						</p>
+					</div>
+					<div className='grid grid-cols-2 gap-x-4 gap-y-1'>
+						<p>Matkvalitet</p>
+						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<p>Servicekvalitet</p>
+						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<p>Stemning</p>
+						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+						<p>Valuta for pengene</p>
+						<Rating value={restaurant.averageOverallRating} size={24} hoverDisabled />
+					</div>
 				</div>
 			</div>
 		</div>

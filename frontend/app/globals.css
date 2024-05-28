@@ -13,7 +13,8 @@
 		--popover: 0 0% 100%;
 		--popover-foreground: 20 14.3% 4.1%;
 
-		--primary: 130 100% 75%;
+		--primary: 130, 67%, 52%;
+		--primary-light: 130, 100%, 75%;
 		--primary-foreground: 60 9.1% 97.8%;
 
 		--secondary: 219 100% 93%;

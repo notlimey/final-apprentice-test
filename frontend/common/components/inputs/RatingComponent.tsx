@@ -23,11 +23,13 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, size = 20, hoverDisabl
 					onMouseEnter={() => !hoverDisabled && setHover(star)}
 					onMouseLeave={() => !hoverDisabled && setHover(null)}
 					className={clsx(
-						// biome-ignore lint/style/noUnusedTemplateLiteral: <explanation>
-						`cursor-pointer`,
-						`w-[${size}px]`,
+						!hoverDisabled && 'cursor-pointer',
 						(hover || value) >= star ? 'fill-primary stroke-primary' : 'fill-card stroke-card',
 					)}
+					style={{
+						width: `${size}px`,
+						height: `${size}px`,
+					}}
 				/>
 			))}
 			{numberOfRatings && numberOfRatings >= 1 ? (
