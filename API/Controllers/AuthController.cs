@@ -119,7 +119,8 @@ public class AuthController : ControllerBase
             
             var user = new ApplicationUser
             {
-                UserName = info.Principal.FindFirstValue(ClaimTypes.Name) ?? email,
+                //remove all whitespace from the username inside, start and end
+                UserName = (info.Principal.FindFirstValue(ClaimTypes.Name) ?? email).Trim().Replace(" ", ""),
                 Email = email,
                 AvatarUrl = $"https://api.dicebear.com/8.x/adventurer/svg?seed={Guid.NewGuid().ToString()}",
                 IsAnonymous = false,
