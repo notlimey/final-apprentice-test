@@ -12,16 +12,12 @@ using Microsoft.AspNetCore.Authentication.Google;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-    
-Console.WriteLine((builder.Configuration.GetConnectionString("DefaultConnection")));
 
-foreach (var variable in Environment.GetEnvironmentVariables())
-{
-    Console.WriteLine(variable);
-}
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                       Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
