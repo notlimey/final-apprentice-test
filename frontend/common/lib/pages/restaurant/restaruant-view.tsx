@@ -87,7 +87,7 @@ export default function RestaurantView(restaurant: Restaurant) {
 						<p>{restaurant.address}</p>
 					</div>
 				</div>
-				<div className='h-64 md:h-full self-stretch'>
+				<div className='h-64 md:h-auto self-stretch'>
 					<RestaurantMap {...restaurant} />
 				</div>
 			</div>
