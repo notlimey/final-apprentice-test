@@ -143,6 +143,7 @@ public class AuthController : ControllerBase
                     var token = GenerateJwtToken(user, roles.ToList());
 
                     // Send user and token information back to Next.js callback
+                    // TODO: Use cookies instead of query parameters for token and id
                     return Redirect($"{returnUrl}?token={Uri.EscapeDataString(token)}&id={user.Id}");
                 }
             }
@@ -242,7 +243,7 @@ public class AuthController : ControllerBase
             var length = depth > 3 ? 10 : 5;
             user.UserName = $"{user.UserName}{Guid.NewGuid().ToString().Substring(0, length)}";
             
-            return await RandomizeUsernameHash(user);
+            return await RandomizeUsernameHash(user, depth + 1);
         }
         
         return user;

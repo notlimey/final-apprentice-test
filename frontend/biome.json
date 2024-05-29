@@ -32,9 +32,7 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"nursery": {
-				"noUnusedImports": "warn"
-			}
+			"nursery": {}
 		},
 		"ignore": [
 			"./.next",
