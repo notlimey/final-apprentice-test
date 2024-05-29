@@ -9,6 +9,7 @@ test
 - [Techstack](/docs/no/techstack.md)
 - [Arkitektur](/docs/no/architecture.md)
 - [Database struktur](/docs/no/database.md)
+- [API Docs](/API/README.md)
 
 ## English
 
