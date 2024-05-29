@@ -22,6 +22,7 @@ test
 
 
 ### En ekstra takk til
+- **Eirik Sjøløkken**: Hjalp meg på ulike temaer i backend [Github](https://github.com/Eiromplays) <br/>
 - **Andreas Rasmussen**: For fantastiske design skisser [LinkedIn](https://www.linkedin.com/in/andreasrasmuss1/) <br/>
 - **Ola Helland Pedersen**: Bistand med next.js [LinkedIn](https://www.linkedin.com/in/ola-helland-pedersen-94268489/) <br/>
 - **Marion Fjeldly**: For at du fikk meg til å starte med dokumentasjonen [LinkedIn](https://www.linkedin.com/in/marionfjeldly/) <br />
