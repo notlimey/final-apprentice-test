@@ -1,3 +1,4 @@
+'use client';
 import Rating from '@/common/components/inputs/RatingComponent';
 import RestaurantMap from '@/common/components/maps/RestaurantMap';
 import CreateNewReviewCard from '@/common/components/reviews/CreateNewReviewCard';
@@ -5,6 +6,7 @@ import { Button } from '@/common/components/ui/button';
 import HeroSection from '@/common/sections/home/HeroSection';
 import type { Restaurant } from '@/common/types/restaurants.types';
 import { Clock, Home, MapPin, Phone, PiggyBank, Plus, Utensils } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 const days = {
@@ -20,6 +22,7 @@ const days = {
 const EXPENSE_LEVEL = ['Veldig dyrt', 'Dyrt', 'Rimelig', 'Billig', 'Veldig billig'];
 
 export default function RestaurantView(restaurant: Restaurant) {
+	const session = useSession();
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const day = (days as any)[new Date().getDay()];
 	const openingHoursToday = restaurant.openingHours[day as keyof typeof restaurant.openingHours];
@@ -116,9 +119,9 @@ export default function RestaurantView(restaurant: Restaurant) {
 					<CreateNewReviewCard
 						restaurantId={restaurant.id}
 						trigger={
-							<Button className='mt-5'>
+							<Button className='mt-5' disabled={!session.data?.user}>
 								<Plus className='size-4 mr-2' />
-								Legg til anmeldelse
+								{session.data?.user ? 'Legg til anmeldelse' : 'Logg inn for å legge til anmeldelse'}
 							</Button>
 						}
 					/>
