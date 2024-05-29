@@ -98,7 +98,7 @@ export default function RestaurantView(restaurant: Restaurant) {
 				<h2 className='text-[36px] leading-[44px]'>Anmeldelser</h2>
 				<div className='flex flex-col md:flex-row gap-y-5 md:flex-nowrap gap-x-[60px] mt-5'>
 					<div className='flex flex-col gap-y-1'>
-						<h3 className='text-[24px]'>Totalvurdering: {restaurant.averageOverallRating}</h3>
+						<h3 className='text-[24px]'>Totalvurdering: {restaurant.averageOverallRating.toFixed(1)}</h3>
 						<Rating value={restaurant.averageOverallRating} />
 						<p>
 							{restaurant.numberOfReviews} {restaurant.numberOfReviews > 1 ? 'anmeldelser' : 'anmeldelse'}
