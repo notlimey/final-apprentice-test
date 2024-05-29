@@ -29,7 +29,7 @@ export default function HeroSection({
 		<div className='grid grid-cols-1 md:grid-cols-2 items-stretch gap-[12px]'>
 			<div
 				className='gap-[24px] flex flex-col justify-center items-center p-[20px] md:p-[80px] bg-primary-light'
-				style={{ flex: '1 0 0' }}
+				style={{ flex: '1 0 0', maxHeight: `${maxHeight + 160}px` }}
 			>
 				<div ref={leftItemRef}>
 					<h1 className='text-[48px] sm:text-[56px] md:text-[64px] font-semibold leading-tight md:leading-[72px]'>
