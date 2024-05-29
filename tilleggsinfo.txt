@@ -1,0 +1,4 @@
+Github: https://github.com/notlimey/final-apprentice-test
+Offentlig demo (frontend): https://notlimey-apprentice-test.vercel.app/
+Demo swagger: https://apprentice-test-notlimey.azurewebsites.net/swagger/index.html
+
