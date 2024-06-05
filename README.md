@@ -6,7 +6,12 @@
 -  [Tech Stack](#tech-stack)
 -  [Lisens / License](#lisens--license)
 -  no
--      test
+    - [Oppgaven](/docs/no/assignment.md)
+    - [Tolkning](/docs/no/interpretation.md)
+    - [Techstack](/docs/no/techstack.md)
+    - [Arkitektur](/docs/no/architecture.md)
+    - [Authentication](/docs/no/authentication.md)
+    - [Database](/docs/no/database.md)
 
 -----
 
