@@ -57,17 +57,6 @@ This project is a web application for restaurant reviews in the Innlandet region
 
 -----
 
-## Bruk / Usage
-### Norsk
--  For å logge inn eller registrere en ny bruker, gå til `/login`.
--  For å legge inn en anmeldelse, naviger til ønsket restaurant og velg "Legg inn anmeldelse".
-
-### English
--  To log in or register a new user, navigate to `/login`.
--  To post a review, navigate to your desired restaurant and select "Post a Review".
-
------
-
 ## Tech Stack
 -  **Frontend**: Next.js, Tailwind CSS, TypeScript
 -  **Backend**: .NET, EF Core, Microsoft Identity
