@@ -1,18 +1,84 @@
-# Fagprøve
-**Karakter:** Meget godt bestått ✅
+# Fagprøve / Final apprentice test
 
-[API Docs](/API/README.md)
+## 📚 Innhold / Table of Contents
+-  [Introduksjon / Introduction](#introduksjon--introduction)
+-  [Installasjon / Installation](#installasjon--installation)
+-  [Bruk / Usage](#bruk--usage)
+-  [Tech Stack](#tech-stack)
+-  [Lisens / License](#lisens--license)
 
-### Planlegging
-- [Oppgaven](/docs/no/assignment.md)
-- [Min tolkning av oppgaven](/docs/no/interpretation.md)
-- [Techstack](/docs/no/techstack.md)
-- [Arkitektur](/docs/no/architecture.md)
-- [Database struktur](/docs/no/database.md)
+-----
 
-### Jira day-to-day-plan
-![Image of jira task board](/docs/images/Screenshot%202024-05-24%20at%2010.16.12.png)
+## Introduksjon / Introduction
+### Norsk
+Dette prosjektet er en webapplikasjon for anmeldelser av restauranter i Innlandetregionen. Brukere kan opprette kontoer, logge inn, legge inn anmeldelser av lokale spisesteder og se eksisterende anmeldelser.
 
+### English
+This project is a web application for restaurant reviews in the Innlandet region. Users can create accounts, log in, post reviews of local eateries, and view existing reviews.
+
+-----
+
+## Installasjon / Installation
+### Norsk
+1. Klon dette repoet:
+    ```sh
+    git clone https://github.com/NotLimey/final-apprentice-test.git
+    ```
+2. Naviger til prosjektmappen:
+    ```sh
+    cd final-apprentice-test/web
+    ```
+3. Installer nødvendige avhengigheter:
+    ```sh
+    pnpm install
+    ```
+4. Start applikasjonen:
+    ```sh
+    pnpm dev
+    ```
+
+### English
+1. Clone this repository:
+    ```sh
+    git clone https://github.com/NotLimey/final-apprentice-test.git
+    ```
+2. Navigate to the project folder:
+    ```sh
+    cd final-apprentice-test/web
+    ```
+3. Install necessary dependencies:
+    ```sh
+    pnpm install
+    ```
+4. Start the application:
+    ```sh
+    pnpm dev
+    ```
+
+-----
+
+## Bruk / Usage
+### Norsk
+-  For å logge inn eller registrere en ny bruker, gå til `/login`.
+-  For å legge inn en anmeldelse, naviger til ønsket restaurant og velg "Legg inn anmeldelse".
+
+### English
+-  To log in or register a new user, navigate to `/login`.
+-  To post a review, navigate to your desired restaurant and select "Post a Review".
+
+-----
+
+## Tech Stack
+-  **Frontend**: Next.js, Tailwind CSS, TypeScript
+-  **Backend**: .NET, EF Core, Microsoft Identity
+-  **Database**: PostgreSQL
+
+-----
+
+## Lisens / License
+Dette prosjektet er lisensiert under MIT-lisensen.
+
+This project is licensed under the MIT License.
 
 ### En ekstra takk til
 - **Eirik Sjøløkken**: Hjalp meg på ulike temaer i backend [Github](https://github.com/Eiromplays) <br/>
