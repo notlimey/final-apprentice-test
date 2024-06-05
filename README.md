@@ -4,8 +4,9 @@
 -  [Introduksjon / Introduction](#introduksjon--introduction)
 -  [Installasjon / Installation](#installasjon--installation)
 -  [Tech Stack](#tech-stack)
--  [Full tech stack](/docs/techstack.md)
 -  [Lisens / License](#lisens--license)
+-  no
+-      test
 
 -----
 
