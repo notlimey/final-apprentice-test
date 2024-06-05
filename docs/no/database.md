@@ -1,5 +1,10 @@
 # Database Schema
 
+[<- Tilbake](/)
+<br />
+
+PostgreSQL
+
 ## Restaurants Table (Restauranter)
 
 ### Kolonner
