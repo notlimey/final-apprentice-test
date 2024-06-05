@@ -1,3 +1,8 @@
+# Arkitektur
+
+[<- Tilbake](/)
+<br />
+
 Legg en plan for både frontend og backend arkitektur. Hvordan skal oppsettet gjøres og hva er viktig for at det skal fungere bra?
 
 Arkitekturen bygger på [Techstack](/docs/no/techstack.md).
