@@ -21,6 +21,7 @@
     - [Architecture](/docs/en/architecture.md)
     - [Authentication](/docs/en/authentication.md)
     - [Database](/docs/en/database.md)
+- [Innlevering / Final paper](/final-paper.pdf)
 
 -----
 
