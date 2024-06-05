@@ -1,5 +1,5 @@
 # Fagprøve
-**Karakter:** Meget godt bestått
+**Karakter:** Meget godt bestått ✅
 
 [API Docs](/API/README.md)
 
