@@ -5,13 +5,20 @@
 -  [Installasjon / Installation](#installasjon--installation)
 -  [Tech Stack](#tech-stack)
 -  [Lisens / License](#lisens--license)
--  no
+-  Norsk
     - [Oppgaven](/docs/no/assignment.md)
     - [Tolkning](/docs/no/interpretation.md)
     - [Techstack](/docs/no/techstack.md)
     - [Arkitektur](/docs/no/architecture.md)
     - [Authentication](/docs/no/authentication.md)
     - [Database](/docs/no/database.md)
+-  English
+    - [Assignment](/docs/en/assignment.md)
+    - [Interpretation](/docs/en/interpretation.md)
+    - [Techstack](/docs/en/techstack.md)
+    - [Architecture](/docs/en/architecture.md)
+    - [Authentication](/docs/en/authentication.md)
+    - [Database](/docs/en/database.md)
 
 -----
 
