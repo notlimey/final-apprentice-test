@@ -3,8 +3,8 @@
 ## 📚 Innhold / Table of Contents
 -  [Introduksjon / Introduction](#introduksjon--introduction)
 -  [Installasjon / Installation](#installasjon--installation)
--  [Bruk / Usage](#bruk--usage)
 -  [Tech Stack](#tech-stack)
+-  [Full tech stack](/docs/techstack.md)
 -  [Lisens / License](#lisens--license)
 
 -----
