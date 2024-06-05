@@ -1,5 +1,7 @@
 # Fagprøve / Final apprentice test
 
+**Karakter / Grade:** Meget godt bestått / Passed with distinction (Best grade)
+
 ## 📚 Innhold / Table of Contents
 -  [Introduksjon / Introduction](#introduksjon--introduction)
 -  [Installasjon / Installation](#installasjon--installation)
