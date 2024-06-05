@@ -34,26 +34,7 @@ This project is a web application for restaurant reviews in the Innlandet region
 
 -----
 
-## Installasjon / Installation
-### Norsk
-1. Klon dette repoet:
-    ```sh
-    git clone https://github.com/NotLimey/final-apprentice-test.git
-    ```
-2. Naviger til prosjektmappen:
-    ```sh
-    cd final-apprentice-test/web
-    ```
-3. Installer nødvendige avhengigheter:
-    ```sh
-    pnpm install
-    ```
-4. Start applikasjonen:
-    ```sh
-    pnpm dev
-    ```
-
-### English
+## Installation
 1. Clone this repository:
     ```sh
     git clone https://github.com/NotLimey/final-apprentice-test.git
