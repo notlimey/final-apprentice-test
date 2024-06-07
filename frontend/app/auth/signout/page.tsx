@@ -13,7 +13,7 @@ export default function Signout() {
 			router.push(data.url);
 		}
 
-		router.push('/');
+		window.location.href = '/';
 	};
 
 	return (
