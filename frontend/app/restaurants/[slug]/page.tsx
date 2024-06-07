@@ -25,7 +25,7 @@ export default async function RestaurantsPage(props: Props) {
 	return (
 		<>
 			<RestaurantView {...restaurant} />
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<div className='flex justify-center items-center py-4 w-full'>Loading...</div>}>
 				<ReviewList restaurantId={restaurant.id} />
 			</Suspense>
 		</>
