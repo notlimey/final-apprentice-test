@@ -1,17 +1,27 @@
 # Fagprøve / Final apprentice test
 
+**Karakter / Grade:** Meget godt bestått / Passed with distinction (Best grade)
+
 ## 📚 Innhold / Table of Contents
 -  [Introduksjon / Introduction](#introduksjon--introduction)
 -  [Installasjon / Installation](#installasjon--installation)
 -  [Tech Stack](#tech-stack)
 -  [Lisens / License](#lisens--license)
--  no
+-  Norsk
     - [Oppgaven](/docs/no/assignment.md)
     - [Tolkning](/docs/no/interpretation.md)
     - [Techstack](/docs/no/techstack.md)
     - [Arkitektur](/docs/no/architecture.md)
     - [Authentication](/docs/no/authentication.md)
     - [Database](/docs/no/database.md)
+-  English
+    - [Assignment](/docs/en/assignment.md)
+    - [Interpretation](/docs/en/interpretation.md)
+    - [Techstack](/docs/en/techstack.md)
+    - [Architecture](/docs/en/architecture.md)
+    - [Authentication](/docs/en/authentication.md)
+    - [Database](/docs/en/database.md)
+- [Innlevering / Final paper](/final-paper.pdf)
 
 -----
 
@@ -24,26 +34,7 @@ This project is a web application for restaurant reviews in the Innlandet region
 
 -----
 
-## Installasjon / Installation
-### Norsk
-1. Klon dette repoet:
-    ```sh
-    git clone https://github.com/NotLimey/final-apprentice-test.git
-    ```
-2. Naviger til prosjektmappen:
-    ```sh
-    cd final-apprentice-test/web
-    ```
-3. Installer nødvendige avhengigheter:
-    ```sh
-    pnpm install
-    ```
-4. Start applikasjonen:
-    ```sh
-    pnpm dev
-    ```
-
-### English
+## Installation
 1. Clone this repository:
     ```sh
     git clone https://github.com/NotLimey/final-apprentice-test.git
