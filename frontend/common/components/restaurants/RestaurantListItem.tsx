@@ -34,7 +34,11 @@ const RestaurantListItem = ({ restaurant }: { restaurant: Restaurant }) => {
 			<div className='flex flex-col gap-y-[12px] transition-colors'>
 				<div className='flex flex-col gap-[4px]'>
 					<h3 className='text-2xl group-hover:underline font-semibold'>{restaurant.name}</h3>
-					<Rating value={restaurant.averageOverallRating ?? 0} numberOfRatings={restaurant.numberOfReviews} />
+					<Rating
+						value={restaurant.averageOverallRating ?? 0}
+						numberOfRatings={restaurant.numberOfReviews}
+						hoverDisabled
+					/>
 				</div>
 				<div className='flex flex-col gap-[8px]'>
 					<p className='inline-flex gap-1 items-center'>
